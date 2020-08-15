@@ -2,23 +2,24 @@ import { deepmerge } from '../utils';
 // import createBreakpoints from './createBreakpoints';
 // import createMixins from './createMixins';
 import createPalette from './createPalette';
-import { ThemeOptions } from './Theme';
+import { ThemeOptions, Theme } from './Theme';
 
 // import createTypography from './createTypography';
 import shadows from './shadows';
-import createShadows from './shadows';
-// import shape from './shape';
+
+import shape from './shape';
+import createTypography from './typography/createTypography';
 // import createSpacing from './createSpacing';
 // import transitions from './transitions';
 // import zIndex from './zIndex';
 
-function createTheme(options: ThemeOptions = {}, ...args: any[]) {
+function createTheme(options: ThemeOptions = {}, ...args: any[]): Theme {
   const {
     // breakpoints: breakpointsInput = {},
     // mixins: mixinsInput = {},
     palette: paletteInput = {},
     // spacing: spacingInput,
-    // typography: typographyInput = {},
+    typography: typographyInput = {},
     ...other
   } = options;
 
@@ -34,10 +35,10 @@ function createTheme(options: ThemeOptions = {}, ...args: any[]) {
       //overrides: {}, // Inject custom styles
       palette,
       //props: {}, // Provide default props
-      shadows: createShadows(),
-      // typography: createTypography(palette, typographyInput),
+      shadows: shadows,
+      typography: createTypography(palette, typographyInput),
       // spacing,
-      // shape,
+      shape,
       // transitions,
       // variants: {},
       // zIndex,

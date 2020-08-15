@@ -57,8 +57,6 @@ export function ThemeProvider({
     return output;
   }, [localTheme, outerTheme]);
 
-  console.log('mergedTheme: ', theme);
-
   return (
     <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
   );

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Text, Pressable, StyleSheet, View } from 'react-native';
-import createStyles from './Button.style';
+import createStyles from './Button.styles';
 import { useTheme, Theme } from '../styles';
 import { capitalize } from '../utils';
+import { Typography } from '../Typography';
+import { TypographyVariant } from '../styles/typography';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonColor = 'primary' | 'secondary' | 'default';
@@ -39,17 +41,26 @@ export const Button = ({
 
   // Calculate Text styles
   const colorStyle = (styles as any)[`${variant}${capitalize(color)}Color`];
-  const textStyles: any = [styles.text];
+  const textStyles: any = [styles[size]];
   textStyles.push(colorStyle);
-  textStyles.push(styles[size]);
 
   //`view-${variant}-${color}`;
-
+  let typeVariant: TypographyVariant;
+  switch (size) {
+    case 'small':
+      typeVariant = 'buttonSmall';
+      break;
+    case 'medium':
+      typeVariant = 'button';
+      break;
+    case 'large':
+      typeVariant = 'buttonLarge';
+      break;
+  }
   return (
     <Pressable
       onPress={onPress}
       // style={({ pressed }) => {
-      //   console.log('retrieve style...');
       //   return [
       //     {
       //       backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white',
@@ -60,7 +71,11 @@ export const Button = ({
     >
       <View style={viewStyles}>
         {startIcon && <Text>Start</Text>}
-        {title ? <Text style={textStyles}>{title}</Text> : `Press Me`}
+        {title ? (
+          <Typography style={textStyles} variant={typeVariant} text={title} />
+        ) : (
+          `Press Me`
+        )}
         {/* {({ pressed }) => (
         <Text style={styles.text}>
           {title ? <Text>{title}</Text> : `Press Me`}
@@ -71,22 +86,5 @@ export const Button = ({
     </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 16,
-  },
-  wrapperCustom: {
-    borderRadius: 8,
-    padding: 6,
-  },
-  logBox: {
-    padding: 20,
-    margin: 10,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: '#f0f0f0',
-    backgroundColor: '#f9f9f9',
-  },
-});
 
 export default Button;

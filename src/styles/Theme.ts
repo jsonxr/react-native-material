@@ -1,12 +1,16 @@
 import { Palette, PaletteOptions } from './Palette';
-import { ViewStyle } from 'react-native';
+import { ShadowType } from './shadows';
+import { ShapeType } from './shape';
+import { TypographyOptions, TypographyType } from './typography/types';
 
 export interface Theme {
   palette: Palette;
-  shadows: ViewStyle[];
+  shadows: ShadowType;
+  shape: ShapeType;
+  typography: TypographyType;
 }
 
 export interface ThemeOptions {
   palette?: PaletteOptions;
-  shadows?: ViewStyle[];
+  typography?: TypographyOptions;
 }

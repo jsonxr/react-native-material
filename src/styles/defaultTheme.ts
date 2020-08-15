@@ -1,5 +1,6 @@
 import createTheme from './createTheme';
+import { Theme } from './Theme';
 
-const defaultTheme = createTheme();
+const defaultTheme: Theme = createTheme();
 
 export default defaultTheme;

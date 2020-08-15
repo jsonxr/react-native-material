@@ -1,6 +1,12 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button } from './Button';
+import React, { ReactNode, ReactElement } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import {
+  Button,
+  ButtonProps,
+  ButtonSize,
+  ButtonVariant,
+  ButtonColor,
+} from './Button';
 import { storiesOf } from '@storybook/react-native';
 import { action } from '@storybook/addon-actions';
 
@@ -10,14 +16,85 @@ import {
   DefaultBackground,
 } from '../../storybook/decorators';
 
-export const ButtonsView = ({ children }: any) => <View>{children}</View>;
+interface ButtonsRowProps extends ButtonProps {
+  variants?: Partial<ButtonProps>[];
+  children?: ReactNode;
+}
+
+export const ButtonsGrid = ({ ...props }: ButtonsRowProps) => {
+  const sizes: ButtonSize[] = ['small', 'medium', 'large'];
+  const variants: ButtonVariant[] = ['text', 'contained', 'outlined'];
+  const colors: ButtonColor[] = ['primary', 'secondary', 'default'];
+
+  return (
+    <View>
+      {variants.map((variant, i) => (
+        <View>
+          <Text>{variant.toString()}</Text>
+          <View style={styles.buttonRow}>
+            {sizes.map((size, j) => (
+              <View>
+                {colors.map((color, k) => (
+                  <Button
+                    {...props}
+                    variant={variant}
+                    size={size}
+                    color={color}
+                  />
+                ))}
+              </View>
+            ))}
+          </View>
+        </View>
+        // <View key={i}>
+        //   <ButtonsRow
+        //     {...props}
+        //     variant={variant}
+        //     variants={[{}, { color: 'primary' }, { color: 'secondary' }]}
+        //   />
+        //   <ButtonsRow
+        //     {...props}
+        //     size={size}
+        //     variants={[
+        //       { variant: 'contained' },
+        //       { variant: 'contained', color: 'primary' },
+        //       { variant: 'contained', color: 'secondary' },
+        //     ]}
+        //   />
+        //   <ButtonsRow
+        //     {...props}
+        //     size={size}
+        //     variants={[
+        //       { variant: 'outlined' },
+        //       { variant: 'outlined', color: 'primary' },
+        //       { variant: 'outlined', color: 'secondary' },
+        //     ]}
+        //   />
+        // </View>
+      ))}
+    </View>
+  );
+};
+
+export const ButtonsRow = ({
+  variants,
+  children,
+  ...props
+}: ButtonsRowProps) => (
+  <View style={styles.buttonRow}>
+    {variants?.map((b, i) => (
+      <Button key={i} {...props} {...b} />
+    ))}
+  </View>
+);
+export const ButtonSizes = () => null;
 
 storiesOf('Buttons', module)
   .addDecorator(Theme)
   .addDecorator(BufferView)
   .addDecorator(DefaultBackground)
   .add('Contained Buttons', () => (
-    <ButtonsView>
+    <View>
       <Button title="Default" variant="contained" onPress={action('onPress')} />
       <Button
         title="Primary"
@@ -51,10 +128,10 @@ storiesOf('Buttons', module)
         disableElevation
         onPress={action('onPress')}
       />
-    </ButtonsView>
+    </View>
   ))
   .add('Text Buttons', () => (
-    <ButtonsView>
+    <View>
       <Button title="Default" onPress={action('onPress')} />
       <Button title="Primary" color="primary" onPress={action('onPress')} />
       <Button title="Secondary" color="secondary" onPress={action('onPress')} />
@@ -65,10 +142,10 @@ storiesOf('Buttons', module)
         href="#contained-buttons"
         onPress={action('onPress')}
       />
-    </ButtonsView>
+    </View>
   ))
   .add('Outlined Buttons', () => (
-    <ButtonsView>
+    <View>
       <Button title="Default" variant="outlined" onPress={action('onPress')} />
       <Button
         title="Primary"
@@ -95,67 +172,13 @@ storiesOf('Buttons', module)
         href="#contained-buttons"
         onPress={action('onPress')}
       />
-    </ButtonsView>
+    </View>
   ))
   .add('Sizes', () => (
-    <ButtonsView>
-      <View style={styles.buttonRow}>
-        <Button title="Hello World" onPress={action('onPress')} />
-        <Button
-          title="Hello World"
-          color="primary"
-          onPress={action('onPress')}
-        />
-        <Button
-          title="Hello World"
-          color="secondary"
-          onPress={action('onPress')}
-        />
-      </View>
-
-      <View style={styles.buttonRow}>
-        <Button
-          title="Hello World"
-          variant="contained"
-          onPress={action('onPress')}
-        />
-        <Button
-          title="Hello World"
-          variant="contained"
-          color="primary"
-          onPress={action('onPress')}
-        />
-        <Button
-          title="Hello World"
-          variant="contained"
-          color="secondary"
-          onPress={action('onPress')}
-        />
-      </View>
-
-      <View style={styles.buttonRow}>
-        <Button
-          title="Hello World"
-          variant="outlined"
-          onPress={action('onPress')}
-        />
-        <Button
-          title="Hello World"
-          variant="outlined"
-          color="primary"
-          onPress={action('onPress')}
-        />
-        <Button
-          title="Hello World"
-          variant="outlined"
-          color="secondary"
-          onPress={action('onPress')}
-        />
-      </View>
-    </ButtonsView>
+    <ButtonsGrid title="Hello World" onPress={action('onPress')} />
   ))
   .add('Buttons with icons and label', () => (
-    <ButtonsView>
+    <View>
       <Button
         title="Delete"
         variant="contained"
@@ -201,7 +224,7 @@ storiesOf('Buttons', module)
         startIcon="save"
         onPress={action('onPress')}
       />
-    </ButtonsView>
+    </View>
   ));
 
 const styles = StyleSheet.create({
