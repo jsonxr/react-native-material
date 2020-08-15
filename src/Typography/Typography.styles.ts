@@ -6,7 +6,24 @@ import { Theme } from '../styles';
  * @param theme
  */
 const createStyles = (theme: Theme) =>
-  StyleSheet.create(theme.typography.variants);
-// StyleSheet.create({ h1: {}, h2: {}, ...});
+  StyleSheet.create({
+    // StyleSheet.create({ h1: {}, h2: {}, ...});
+    ...theme.typography.variants,
+    errorColor: {
+      color: theme.palette.error.contrastText,
+    },
+    primaryColor: {
+      color: theme.palette.primary.main,
+    },
+    secondaryColor: {
+      color: theme.palette.secondary.main,
+    },
+    textPrimaryColor: {
+      color: theme.palette.text.primary,
+    },
+    textSecondaryColor: {
+      color: theme.palette.text.secondary,
+    },
+  });
 
 export default createStyles;

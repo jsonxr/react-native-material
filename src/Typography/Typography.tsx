@@ -3,10 +3,19 @@ import { Text, TextStyle } from 'react-native';
 import createStyles from './Typography.styles';
 import { useTheme } from '../styles/useTheme';
 import { TypographyVariant, TypographyVariants } from '../styles/typography';
+
+export type TypographyColor =
+  | 'error'
+  | 'primary'
+  | 'secondary'
+  | 'textPrimary'
+  | 'textSecondary';
+
 export interface TypographyProps {
-  text: string;
+  text?: string;
+  children?: ReactNode;
   style?: TextStyle;
-  color?: string;
+  color?: TypographyColor;
   variant?: TypographyVariant;
   h1?: boolean;
   h2?: boolean;
@@ -49,6 +58,7 @@ const getStylenameFromVariantBools = (
  */
 export const Typography = ({
   text,
+  children,
   style,
   color,
   variant,
@@ -56,6 +66,9 @@ export const Typography = ({
 }: TypographyProps) => {
   const theme = useTheme();
   const styles = createStyles(theme);
+  const computedStyles: any = [];
+
+  // Variant
   let styleName = variant;
   if (!styleName) {
     styleName = getStylenameFromVariantBools(variants);
@@ -63,14 +76,22 @@ export const Typography = ({
   if (!styleName) {
     styleName = 'body1';
   }
-  //const styleName = variant ?? 'body1';
-  const computedStyles: any = [(styles as any)[styleName]];
+  computedStyles.push((styles as any)[styleName]);
+
+  // color
   if (color) {
-    computedStyles.push({ color });
+    const colorStyle = (styles as any)[`${color}Color`];
+    computedStyles.push(colorStyle);
   }
+
+  // style
   if (style) {
     computedStyles.push(style);
   }
 
-  return <Text style={computedStyles}>{text}</Text>;
+  if (text) {
+    return <Text style={computedStyles}>{text}</Text>;
+  }
+
+  return <Text style={computedStyles}>{children}</Text>;
 };
