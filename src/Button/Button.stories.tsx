@@ -46,31 +46,6 @@ export const ButtonsGrid = ({ ...props }: ButtonsRowProps) => {
             ))}
           </View>
         </View>
-        // <View key={i}>
-        //   <ButtonsRow
-        //     {...props}
-        //     variant={variant}
-        //     variants={[{}, { color: 'primary' }, { color: 'secondary' }]}
-        //   />
-        //   <ButtonsRow
-        //     {...props}
-        //     size={size}
-        //     variants={[
-        //       { variant: 'contained' },
-        //       { variant: 'contained', color: 'primary' },
-        //       { variant: 'contained', color: 'secondary' },
-        //     ]}
-        //   />
-        //   <ButtonsRow
-        //     {...props}
-        //     size={size}
-        //     variants={[
-        //       { variant: 'outlined' },
-        //       { variant: 'outlined', color: 'primary' },
-        //       { variant: 'outlined', color: 'secondary' },
-        //     ]}
-        //   />
-        // </View>
       ))}
     </View>
   );
@@ -132,10 +107,20 @@ storiesOf('Buttons', module)
   ))
   .add('Text Buttons', () => (
     <View>
+      <Button onPress={action('onPress')}>Default</Button>
       <Button title="Default" onPress={action('onPress')} />
+
+      <Button color="primary">Primary</Button>
       <Button title="Primary" color="primary" onPress={action('onPress')} />
+
+      <Button color="secondary">secondary</Button>
       <Button title="Secondary" color="secondary" onPress={action('onPress')} />
+
+      <Button disabled onPress={action('onPress')}>
+        Disabled
+      </Button>
       <Button title="Disabled" disabled onPress={action('onPress')} />
+
       <Button
         title="Link"
         color="primary"

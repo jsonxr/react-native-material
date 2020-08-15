@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Text, Pressable, StyleSheet, View } from 'react-native';
 import createStyles from './Button.styles';
 import { useTheme, Theme } from '../styles';
@@ -11,7 +11,8 @@ export type ButtonColor = 'primary' | 'secondary' | 'default';
 export type ButtonVariant = 'contained' | 'outlined' | 'text';
 
 export interface ButtonProps {
-  title: string;
+  title?: string;
+  children?: ReactNode;
   variant?: ButtonVariant;
   onPress?: () => void;
   color?: ButtonColor;
@@ -25,6 +26,7 @@ export interface ButtonProps {
 
 export const Button = ({
   title,
+  children,
   startIcon,
   endIcon,
   color = 'default',
@@ -71,10 +73,13 @@ export const Button = ({
     >
       <View style={viewStyles}>
         {startIcon && <Text>Start</Text>}
-        {title ? (
+        {title && (
           <Typography style={textStyles} variant={typeVariant} text={title} />
-        ) : (
-          `Press Me`
+        )}
+        {children && (
+          <Typography style={textStyles} variant={typeVariant}>
+            {children}
+          </Typography>
         )}
         {/* {({ pressed }) => (
         <Text style={styles.text}>
