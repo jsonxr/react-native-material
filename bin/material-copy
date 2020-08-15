@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ ! -d '.material-ui' ]; then
+  git clone https://github.com/mui-org/material-ui.git .material-ui
+else
+  cd .material-ui
+  git pull
+  cd ..
+fi
+
+cp .material-ui/packages/material-ui/src/colors/*.js src/colors
+cp .material-ui/packages/material-ui/src/styles/colorManipulator.* src/styles
