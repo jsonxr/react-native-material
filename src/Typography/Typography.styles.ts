@@ -24,6 +24,9 @@ const createStyles = (theme: Theme) =>
     textSecondaryColor: {
       color: theme.palette.text.secondary,
     },
+    textGutterBotton: {
+      marginBottom: theme.typography.htmlFontSize * 0.35,
+    },
   });
 
 export default createStyles;

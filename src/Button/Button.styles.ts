@@ -3,7 +3,7 @@ import { Theme } from '../styles';
 import { fade } from '../styles';
 
 const createStyles = (theme: Theme) => {
-  const view: ViewStyle = {
+  const root: ViewStyle = {
     flexDirection: 'row',
     borderRadius: theme.shape.borderRadius,
     justifyContent: 'center',
@@ -12,12 +12,12 @@ const createStyles = (theme: Theme) => {
   };
 
   const contained = (theme: Theme, backgroundColor: string): ViewStyle => ({
-    ...view,
+    ...root,
     backgroundColor,
     ...theme.shadows[4],
   });
   const outlined = (borderColor: string): ViewStyle => ({
-    ...view,
+    ...root,
     borderWidth: 1,
     borderColor,
   });
@@ -54,15 +54,9 @@ const createStyles = (theme: Theme) => {
     textDefaultColor: { color: greyContrast },
     textPrimaryColor: { color: primary },
     textSecondaryColor: { color: theme.palette.secondary.main },
-    textPrimaryView: {
-      ...view,
-    },
-    textSecondaryView: {
-      ...view,
-    },
-    textDefaultView: {
-      ...view,
-    },
+    textPrimaryView: root,
+    textSecondaryView: root,
+    textDefaultView: root,
 
     iconSizeSmall: { fontSize: 18 },
     iconSizeMedium: { fontSize: 20 },
@@ -86,25 +80,3 @@ const createStyles = (theme: Theme) => {
 };
 
 export default createStyles;
-
-// small: {
-//       paddingVertical: 4,
-//       paddingHorizontal: 5,
-//       fontSize: EM_SMALL,
-//     },
-//     medium: {
-//       fontSize: EM_MEDIUM,
-//       paddingVertical: 6,
-//       paddingHorizontal: 8,
-//     },
-//     large: {
-//       fontSize: EM_LARGE,
-//       paddingVertical: 8,
-//       paddingHorizontal: 11,
-//     },
-
-//     text: {
-//       //...getRobotoFontStyle('500'),
-//       textTransform: 'uppercase',
-//       letterSpacing: 0.02857 * EM_1,
-//     },

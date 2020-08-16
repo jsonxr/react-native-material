@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Text, Pressable, StyleSheet, View } from 'react-native';
+import { Text, Pressable, StyleSheet, View, ViewStyle } from 'react-native';
 import createStyles from './Button.styles';
 import { useTheme, Theme } from '../styles';
 import { capitalize } from '../utils';
@@ -12,6 +12,7 @@ export type ButtonVariant = 'contained' | 'outlined' | 'text';
 
 export interface ButtonProps {
   title?: string;
+  style?: ViewStyle;
   children?: ReactNode;
   variant?: ButtonVariant;
   onPress?: () => void;
@@ -26,6 +27,7 @@ export interface ButtonProps {
 
 export const Button = ({
   title,
+  style,
   children,
   startIcon,
   endIcon,
@@ -39,7 +41,10 @@ export const Button = ({
 
   // Calculate Color style
   const viewStyle = (styles as any)[`${variant}${capitalize(color)}View`];
-  const viewStyles: any = [viewStyle];
+  const rootStyle: any = [viewStyle];
+  if (style) {
+    rootStyle.push(style);
+  }
 
   // Calculate Text styles
   const colorStyle = (styles as any)[`${variant}${capitalize(color)}Color`];
@@ -71,7 +76,7 @@ export const Button = ({
       //   ];
       // }}
     >
-      <View style={viewStyles}>
+      <View style={rootStyle}>
         {startIcon && <Text>Start</Text>}
         {title && (
           <Typography style={textStyles} variant={typeVariant} text={title} />

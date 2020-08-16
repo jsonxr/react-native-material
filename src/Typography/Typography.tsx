@@ -17,6 +17,8 @@ export interface TypographyProps {
   style?: TextStyle;
   color?: TypographyColor;
   variant?: TypographyVariant;
+  gutterBottom?: boolean;
+
   h1?: boolean;
   h2?: boolean;
   h3?: boolean;
@@ -35,21 +37,25 @@ export interface TypographyProps {
 }
 
 const getStylenameFromVariantBools = (
+  styles: Record<string, any>,
   variants: any
 ): TypographyVariant | undefined => {
-  const styles = Object.keys(variants).filter(
-    (key: string) => typeof variants[key] === 'boolean' && variants[key]
+  // Get the filtered style
+  const filteredStyles = Object.keys(variants).filter(
+    (key: string) =>
+      typeof variants[key] === 'boolean' && variants[key] && styles[key]
   );
-  switch (styles.length) {
+  switch (filteredStyles.length) {
     case 0:
       return;
     case 1:
-      return styles[0] as TypographyVariant;
+      return filteredStyles[0] as TypographyVariant;
   }
-  // <Typography h1 h2 text="" /> is invalid
+
+  // Error! <Typography h1 h2 /> is invalid
   throw new Error(
-    `Typography: <Typography ${styles.join(' ')} />\n\n` +
-      `You may only specify one of ${styles.join(',')}`
+    `Typography: <Typography ${filteredStyles.join(' ')} />\n\n` +
+      `You may only specify one of ${filteredStyles.join(',')}`
   );
 };
 
@@ -58,6 +64,7 @@ const getStylenameFromVariantBools = (
  */
 export const Typography = ({
   text,
+  gutterBottom,
   children,
   style,
   color,
@@ -71,7 +78,7 @@ export const Typography = ({
   // Variant
   let styleName = variant;
   if (!styleName) {
-    styleName = getStylenameFromVariantBools(variants);
+    styleName = getStylenameFromVariantBools(styles, variants);
   }
   if (!styleName) {
     styleName = 'body1';
@@ -87,6 +94,10 @@ export const Typography = ({
   // style
   if (style) {
     computedStyles.push(style);
+  }
+
+  if (gutterBottom) {
+    computedStyles.push(styles.textGutterBotton);
   }
 
   if (text) {
