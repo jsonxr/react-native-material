@@ -1,20 +1,16 @@
 import React, { ReactNode, ReactElement } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import { storiesOf } from '@storybook/react-native';
+import { action } from '@storybook/addon-actions';
+import { ThemeDecorator, DefaultDecorator } from '../../storybook/decorators';
+
 import {
   Button,
   ButtonProps,
   ButtonSize,
   ButtonVariant,
   ButtonColor,
-} from './Button';
-import { storiesOf } from '@storybook/react-native';
-import { action } from '@storybook/addon-actions';
-
-import {
-  Theme,
-  BufferView,
-  DefaultBackground,
-} from '../../storybook/decorators';
+} from '..';
 
 interface ButtonsRowProps extends ButtonProps {
   variants?: Partial<ButtonProps>[];
@@ -65,9 +61,8 @@ export const ButtonsRow = ({
 export const ButtonSizes = () => null;
 
 storiesOf('Buttons', module)
-  .addDecorator(Theme)
-  .addDecorator(BufferView)
-  .addDecorator(DefaultBackground)
+  .addDecorator(ThemeDecorator)
+  .addDecorator(DefaultDecorator)
   .add('Contained Buttons', () => (
     <View>
       <Button title="Default" variant="contained" onPress={action('onPress')} />

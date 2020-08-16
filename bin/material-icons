@@ -1,0 +1,61 @@
+#!env node
+
+//import icons from './MaterialIconMap';
+const fetch = require('node-fetch');
+
+const header = `//
+// This is auto-generated from a script... bin/material-icons
+// https://raw.githubusercontent.com/google/material-design-icons/master/iconfont/codepoints
+//
+
+// prettier-ignore
+`;
+
+const MaterialCodeCarsTs = (lines) => {
+  let str = header + `export const MaterialCodeChars = {`;
+  for (const line of lines) {
+    const s = line.trim().split(' ');
+    const v = parseInt(`0x${s[1]}`, 16);
+    str += `  '${s[0]}': ${v},`;
+  }
+  str = `}\n`;
+  return str;
+};
+
+const MaterialIconMapTs = (lines) => {
+  let str = header + `export default new Map<string, number>([`;
+  for (const line of lines) {
+    const s = line.trim().split(' ');
+    const v = parseInt(`0x${s[1]}`, 16);
+    str += `\n  ['${s[0]}', ${v}],`;
+  }
+  str += `\n]);\n`;
+  return str;
+};
+
+const IconNameTs = (lines) => {
+  let str = header + `export type IconName =`;
+  for (const line of lines) {
+    const s = line.trim().split(' ');
+    const v = parseInt(`0x${s[1]}`, 16);
+    str += `\n  | '${s[0]}'`;
+  }
+  str += `;\n`;
+  return str;
+};
+async function main() {
+  const results = await fetch(
+    'https://raw.githubusercontent.com/google/material-design-icons/master/iconfont/codepoints'
+  );
+
+  if (results.status !== 200) {
+    console.error('Error: ', results.statusText);
+    return;
+  }
+
+  const lines = (await results.text()).trim().split('\n');
+  //console.log(MaterialCodeCarsTs(lines));
+  //console.log(MaterialIconMapTs(lines));
+  console.log(IconNameTs(lines));
+}
+main();

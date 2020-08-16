@@ -1,19 +1,25 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
+import { RippleButton } from './RippleButton';
 import { storiesOf } from '@storybook/react-native';
 import { ThemeDecorator, DefaultDecorator } from '../../storybook/decorators';
 
-import { Avatar } from '..';
+import { Icon } from '..';
 
-storiesOf('Avatar', module)
+storiesOf('IconButton', module)
   .addDecorator(ThemeDecorator)
   .addDecorator(DefaultDecorator)
   .add('Default', () => (
     <View style={styles.root}>
-      <Avatar />
+      <RippleButton>
+        <Icon name="android" />
+      </RippleButton>
     </View>
   ));
 
 const styles = StyleSheet.create({
-  root: {},
+  root: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
 });

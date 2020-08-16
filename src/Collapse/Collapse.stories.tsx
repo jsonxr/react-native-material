@@ -1,18 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Collapse } from './Collapse';
 import { storiesOf } from '@storybook/react-native';
-
-import {
-  Theme,
-  BufferView,
-  DefaultBackground,
-} from '../../storybook/decorators';
+import { ThemeDecorator, DefaultDecorator } from '../../storybook/decorators';
+import { Collapse } from '..';
 
 storiesOf('Collapse', module)
-  .addDecorator(Theme)
-  .addDecorator(BufferView)
-  .addDecorator(DefaultBackground)
+  .addDecorator(ThemeDecorator)
+  .addDecorator(DefaultDecorator)
   .add('Default', () => (
     <View style={styles.root}>
       <Collapse></Collapse>

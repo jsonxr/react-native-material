@@ -2,11 +2,8 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { action } from '@storybook/addon-actions';
-import {
-  Theme,
-  BufferView,
-  DefaultBackground,
-} from '../../storybook/decorators';
+import { ThemeDecorator, DefaultDecorator } from '../../storybook/decorators';
+
 import {
   Avatar,
   Button,
@@ -50,7 +47,7 @@ const ComplexCard = () => (
       avatar={<Avatar>R</Avatar>}
       action={
         <IconButton aria-label="settings">
-          <Icon name="moreVert" />
+          <Icon name="more_vert" />
         </IconButton>
       }
       title="Shrimp and Chorizo Paella"
@@ -72,7 +69,7 @@ const ComplexCard = () => (
         <Icon name="share" />
       </IconButton>
       <IconButton>
-        <Icon name="expandMore" />
+        <Icon name="expand_more" />
       </IconButton>
     </CardActions>
     <Collapse timeout="auto" unmountOnExit>
@@ -109,9 +106,8 @@ const ComplexCard = () => (
 );
 
 storiesOf('Card', module)
-  .addDecorator(Theme)
-  .addDecorator(BufferView)
-  .addDecorator(DefaultBackground)
+  .addDecorator(ThemeDecorator)
+  .addDecorator(DefaultDecorator)
   .add('Default', () => (
     <View style={styles.view}>
       <Card style={styles.card}>

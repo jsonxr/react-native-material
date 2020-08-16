@@ -1,5 +1,6 @@
 export * from './Avatar';
 export * from './Button';
+export * from './ButtonBase';
 export * from './Card';
 export * from './CardActions';
 export * from './CardContent';

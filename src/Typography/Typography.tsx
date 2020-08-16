@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { Text, TextStyle } from 'react-native';
 import createStyles from './Typography.styles';
 import { useTheme } from '../styles/useTheme';
-import { TypographyVariant, TypographyVariants } from '../styles/typography';
+import { TypographyVariant } from '../styles/typography';
 
 export type TypographyColor =
   | 'error'
@@ -18,6 +18,7 @@ export interface TypographyProps {
   color?: TypographyColor;
   variant?: TypographyVariant;
   gutterBottom?: boolean;
+  paragraph?: boolean;
 
   h1?: boolean;
   h2?: boolean;
@@ -65,6 +66,7 @@ const getStylenameFromVariantBools = (
 export const Typography = ({
   text,
   gutterBottom,
+  paragraph,
   children,
   style,
   color,

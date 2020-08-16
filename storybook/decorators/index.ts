@@ -1,2 +1,2 @@
-export * from './decorators';
-export * from './theme';
+export * from './DefaultDecorator';
+export * from './ThemeDecorator';

@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Text, Pressable, StyleSheet, View, ViewStyle } from 'react-native';
+import { ButtonBase } from '../ButtonBase/ButtonBase';
 import createStyles from './Button.styles';
 import { useTheme, Theme } from '../styles';
 import { capitalize } from '../utils';
@@ -65,7 +66,8 @@ export const Button = ({
       break;
   }
   return (
-    <Pressable
+    <ButtonBase
+      style={rootStyle}
       onPress={onPress}
       // style={({ pressed }) => {
       //   return [
@@ -76,24 +78,22 @@ export const Button = ({
       //   ];
       // }}
     >
-      <View style={rootStyle}>
-        {startIcon && <Text>Start</Text>}
-        {title && (
-          <Typography style={textStyles} variant={typeVariant} text={title} />
-        )}
-        {children && (
-          <Typography style={textStyles} variant={typeVariant}>
-            {children}
-          </Typography>
-        )}
-        {/* {({ pressed }) => (
+      {startIcon && <Text>Start</Text>}
+      {title && (
+        <Typography style={textStyles} variant={typeVariant} text={title} />
+      )}
+      {children && (
+        <Typography style={textStyles} variant={typeVariant}>
+          {children}
+        </Typography>
+      )}
+      {/* {({ pressed }) => (
         <Text style={styles.text}>
           {title ? <Text>{title}</Text> : `Press Me`}
         </Text>
       )} */}
-        {endIcon && <Text>End</Text>}
-      </View>
-    </Pressable>
+      {endIcon && <Text>End</Text>}
+    </ButtonBase>
   );
 };
 

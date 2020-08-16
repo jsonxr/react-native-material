@@ -1,19 +1,16 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
+import { action } from '@storybook/addon-actions';
 import { ThemeDecorator, DefaultDecorator } from '../../storybook/decorators';
 
-import { Avatar } from '..';
+import { ButtonBase } from '..';
 
-storiesOf('Avatar', module)
+storiesOf('ButtonBase', module)
   .addDecorator(ThemeDecorator)
   .addDecorator(DefaultDecorator)
   .add('Default', () => (
-    <View style={styles.root}>
-      <Avatar />
+    <View>
+      <ButtonBase onPress={action('onPress')} />
     </View>
   ));
-
-const styles = StyleSheet.create({
-  root: {},
-});

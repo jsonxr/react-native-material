@@ -1,8 +1,10 @@
 import '../src/Avatar/Avatar.stories';
 import '../src/Button/Button.stories';
+import '../src/ButtonBase/ButtonBase.stories';
 import '../src/Card/Card.stories';
-import '../src/Collapse';
-import '../src/Icon';
+import '../src/Collapse/Collapse.stories';
+import '../src/Icon/Icon.stories';
 import '../src/IconButton/IconButton.stories';
 import '../src/Paper/Paper.stories';
+import '../src/RippleButton/RippleButton.stories';
 import '../src/Typography/Typography.stories';

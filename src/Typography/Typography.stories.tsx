@@ -1,17 +1,13 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
-import { Typography } from './Typography';
+import { ThemeDecorator } from '../../storybook/decorators';
 
-import {
-  Theme,
-  BufferView,
-  DefaultBackground,
-} from '../../storybook/decorators';
+import { Typography } from '..';
 import { useTheme } from '../styles/useTheme';
 
 storiesOf('Typography', module)
-  .addDecorator(Theme)
+  .addDecorator(ThemeDecorator)
   .add('Variants', () => (
     <ScrollView style={styles.view} contentContainerStyle={{}}>
       <Typography variant="h2" text="Roboto" />

@@ -1,20 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { Paper, elevations, ElevationType } from './Paper';
 import { storiesOf } from '@storybook/react-native';
+import { ThemeDecorator, DefaultDecorator } from '../../storybook/decorators';
 
-import {
-  Theme,
-  BufferView,
-  DefaultBackground,
-} from '../../storybook/decorators';
+import { Paper, elevations, ElevationType } from '..';
 
 export const CardsView = ({ children }: any) => <View>{children}</View>;
 
 storiesOf('Paper', module)
-  .addDecorator(Theme)
-  .addDecorator(BufferView)
-  .addDecorator(DefaultBackground)
+  .addDecorator(ThemeDecorator)
+  .addDecorator(DefaultDecorator)
   .add('Elevations', () => (
     <View style={styles.view}>
       {elevations.map((n: ElevationType, i: number) => (

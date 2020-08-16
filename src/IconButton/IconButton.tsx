@@ -16,10 +16,22 @@ export interface IconButtonProps {
   size?: IconButtonSize;
   style?: ViewStyle;
 }
-export const IconButton = React.forwardRef(
-  ({ ...props }: IconButtonProps, ref) => {
-    const theme = useTheme();
-    const styles = createStyles(theme);
-    return <View style={styles.root} {...props} />;
+export const IconButton = ({
+  size = 'medium',
+  color = 'default',
+  ...props
+}: IconButtonProps) => {
+  const theme = useTheme();
+  const styles = createStyles(theme);
+  const rootStyles: ViewStyle[] = [styles.root];
+  if (size) {
+    const sizeStyle = styles[size];
+    rootStyles.push(sizeStyle);
   }
-);
+  if (color) {
+    const colorStyle = styles[color];
+    rootStyles.push(colorStyle);
+  }
+
+  return <View style={rootStyles} {...props} />;
+};
