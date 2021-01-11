@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { View, ViewStyle } from 'react-native';
 import createStyles from './RippleButton.styles';
-import { useTheme } from '../styles/useTheme';
+import { useTheme } from '../core/styles/useTheme';
 
 export interface RippleButtonProps {
   children?: ReactNode;

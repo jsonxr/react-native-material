@@ -6,7 +6,7 @@ import { ThemeDecorator, DefaultDecorator } from '../../storybook/decorators';
 
 import { Icon } from '..';
 
-storiesOf('IconButton', module)
+storiesOf('RippleButton', module)
   .addDecorator(ThemeDecorator)
   .addDecorator(DefaultDecorator)
   .add('Default', () => (

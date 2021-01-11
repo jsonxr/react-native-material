@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Theme, fade } from '../styles';
+import { Theme, fade } from '../core/styles';
 
 const createStyles = (theme: Theme) => {
   return StyleSheet.create({
