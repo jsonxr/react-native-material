@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Theme } from '../styles/Theme';
+import { Theme } from '../styles/Theme/Theme';
 
 const createStyles = (theme: Theme, spacing: 'medium' | 'small' | number) => {
   let marginLeft = -theme.spacing(1);

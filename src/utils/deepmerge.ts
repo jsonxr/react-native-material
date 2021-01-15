@@ -2,7 +2,11 @@ export function isPlainObject(item: any) {
   return item && typeof item === 'object' && item.constructor === Object;
 }
 
-export function deepmerge(target: any, source: any, options = { clone: true }) {
+export function deepmerge<T extends {}, U extends {}>(
+  target: T,
+  source: U,
+  options = { clone: true }
+): T & U {
   const output = options.clone ? { ...target } : target;
 
   if (isPlainObject(target) && isPlainObject(source)) {
@@ -12,13 +16,17 @@ export function deepmerge(target: any, source: any, options = { clone: true }) {
         return;
       }
 
-      if (isPlainObject(source[key]) && key in target) {
-        output[key] = deepmerge(target[key], source[key], options);
+      if (isPlainObject((source as any)[key]) && key in target) {
+        (output as any)[key] = deepmerge(
+          (target as any)[key],
+          (source as any)[key],
+          options
+        );
       } else {
-        output[key] = source[key];
+        (output as any)[key] = (source as any)[key];
       }
     });
   }
 
-  return output;
+  return output as T & U;
 }

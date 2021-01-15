@@ -2,15 +2,16 @@ import { deepmerge } from '../../utils';
 // import createBreakpoints from './createBreakpoints';
 // import createMixins from './createMixins';
 import createPalette from './createPalette';
-import { Theme, ThemeOptions } from './Theme';
-import shadows from './shadows';
+import { Theme } from './Theme/Theme';
+import shadows, { Shadows } from './shadows';
 import shape from './shape';
 import createTypography from './typography/createTypography';
 import createSpacing from './createSpacing';
 // import createSpacing from './createSpacing';
 // import transitions from './transitions';
 
-function createMuiTheme(options: ThemeOptions = {}, ...args: any[]): Theme {
+function createMuiTheme<T>(options?: T, ...args: any[]): T & Theme {
+  const o: any = options ?? {};
   const {
     // breakpoints: breakpointsInput = {},
     // mixins: mixinsInput = {},
@@ -18,7 +19,7 @@ function createMuiTheme(options: ThemeOptions = {}, ...args: any[]): Theme {
     spacing: spacingInput,
     typography: typographyInput = {},
     ...other
-  } = options;
+  } = o;
 
   const palette = createPalette(paletteInput);
   // const breakpoints = createBreakpoints(breakpointsInput);
@@ -27,24 +28,23 @@ function createMuiTheme(options: ThemeOptions = {}, ...args: any[]): Theme {
   let muiTheme = deepmerge(
     {
       //breakpoints,
-      //direction: 'ltr',
+      direction: 'ltr',
       //mixins: createMixins(breakpoints, spacing, mixinsInput),
-      //overrides: {}, // Inject custom styles
+      components: {}, // Inject component definitions
       palette,
-      //props: {}, // Provide default props
-      shadows: shadows,
+      // Don't use [...shadows] until you've verified its transpiled code is not invoking the iterator protocol.
+      //shadows: shadows.slice(),
       typography: createTypography(palette, typographyInput),
       spacing: createSpacing(spacingInput),
-      shape,
-      // transitions,
-      // variants: {},
-      // zIndex,
+      shape: { ...shape },
+      //transitions: { duration, easing, create, getAutoHeightDuration },
+      //zIndex: { ...zIndex },
     },
     other
   );
 
   muiTheme = args.reduce((acc, argument) => deepmerge(acc, argument), muiTheme);
-  return muiTheme;
+  return (muiTheme as unknown) as T & Theme;
 }
 
 export default createMuiTheme;

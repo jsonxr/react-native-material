@@ -67,29 +67,6 @@ storiesOf('Avatar', module)
   .addDecorator(ThemeDecorator)
   .addDecorator(DefaultDecorator)
   .add('Default', () => {
-    const theme: ThemeOptions = {
-      components: {
-        MuiAvatar: {
-          defaultProps: {
-            size: 200,
-            variant: 'circular',
-          },
-          styleOverrides: {
-            root: {
-              borderWidth: 5,
-              borderColor: 'black',
-            },
-          },
-        },
-      },
-    };
-    return (
-      <ThemeProvider value={theme}>
-        <Avatar style={styles.red}>O</Avatar>
-      </ThemeProvider>
-    );
-  })
-  .add('Default2', () => {
     return (
       <View style={styles.root}>
         <AvatarRow>
@@ -123,6 +100,32 @@ storiesOf('Avatar', module)
           </Avatar>
         </AvatarRow>
       </View>
+    );
+  })
+  .add('Themed', () => {
+    const theme: ThemeOptions = {
+      components: {
+        MuiAvatar: {
+          defaultProps: {
+            size: 200,
+            variant: 'circular',
+          },
+          styleOverrides: {
+            root: {
+              borderWidth: 5,
+              borderColor: 'black',
+            },
+            text: {
+              textTransform: 'lowercase',
+            },
+          },
+        },
+      },
+    };
+    return (
+      <ThemeProvider theme={theme}>
+        <Avatar style={styles.red}>O</Avatar>
+      </ThemeProvider>
     );
   })
   .add('Images', () => (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TextStyle } from 'react-native';
 import createStyles from './Icon.styles';
-import { useTheme } from '../styles/useTheme/useTheme';
+import { useTheme } from '../styles/Theme/useTheme';
 import iconFontByName from './iconFontByName';
 import { IconSize, IconColor, IconName } from './types';
 

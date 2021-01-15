@@ -10,6 +10,21 @@ import { AvatarProps, AvatarStyles } from '../Avatar';
 
 //{ [x: string]: { defaultProps?: Partial<any> | undefined; }; }
 
+export type ComponentsVariants = {
+  [Name in keyof ComponentsPropsList]?: Array<{
+    props: Partial<ComponentsPropsList[Name]>;
+    style: // JSS property bag
+    | CSSProperties
+      // JSS property bag where values are based on props
+      | CreateCSSProperties<Partial<ComponentsPropsList[Name]>>
+      // JSS property bag based on props
+      | PropsFunc<
+          Partial<ComponentsPropsList[Name]>,
+          CreateCSSProperties<Partial<ComponentsPropsList[Name]>>
+        >;
+  }>;
+};
+
 export interface Components {
   // MuiAlert?: {
   //   defaultProps?: ComponentsProps['MuiAlert'];

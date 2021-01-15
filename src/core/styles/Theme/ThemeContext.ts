@@ -1,8 +1,7 @@
 import React from 'react';
-import defaultTheme from '../defaultTheme';
-import { Theme } from '../Theme';
+import { Theme } from './Theme';
 
-const ThemeContext = React.createContext<Theme>(defaultTheme);
+const ThemeContext = React.createContext<Theme | null>(null);
 
 if (process.env.NODE_ENV !== 'production') {
   ThemeContext.displayName = 'ThemeContext';

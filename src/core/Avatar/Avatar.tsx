@@ -10,9 +10,9 @@ import {
   ViewStyle,
 } from 'react-native';
 import createStyles from './Avatar.styles';
-import { useTheme } from '../styles/useTheme/useTheme';
-import { Theme } from '../styles/Theme';
-import useThemeProps from '../styles/useThemeProps';
+import { useTheme } from '../styles/Theme/useTheme';
+import { Theme } from '../styles/Theme/Theme';
+import useThemeProps from '../styles/Theme/useThemeProps';
 
 type AvatarSize = number | 'small' | 'medium' | 'large';
 

@@ -1,12 +1,12 @@
-import { Spacing, SpacingOptions } from './createSpacing';
-import { Palette, PaletteOptions } from './Palette';
-import { ShadowType } from './shadows';
-import { Shape, ShapeOptions } from './shape';
-import { TypographyType } from './typography/types';
+import { Spacing, SpacingOptions } from '../createSpacing';
+import { Palette, PaletteOptions } from '../Palette';
+import { Shadows } from '../shadows';
+import { Shape, ShapeOptions } from '../shape';
+import { TypographyType } from '../typography/types';
 
-import { ZIndexOptions } from './zIndex';
-import { TypographyOptions } from './typography/types';
-import { Components } from './components';
+import { ZIndexOptions } from '../zIndex';
+import { TypographyOptions } from '../typography/types';
+import { Components } from '../components';
 
 export interface BreakpointsOptions {}
 export interface Direction {}
@@ -30,13 +30,20 @@ export interface Theme {
   zIndex: ZIndexOptions;
 }
 
-export interface ThemeOptions
-  extends Partial<Omit<Theme, 'typography' | 'spacing' | 'palette' | 'shape'>> {
-  typography?: TypographyOptions | ((palette: Palette) => TypographyOptions);
-  spacing?: SpacingOptions;
-  palette?: PaletteOptions;
+export interface ThemeOptions {
   shape?: ShapeOptions;
+  breakpoints?: BreakpointsOptions;
+  direction?: Direction;
+  mixins?: MixinsOptions;
+  components?: Components;
+  palette?: PaletteOptions;
+  shadows?: Shadows;
+  spacing?: SpacingOptions;
+  transitions?: TransitionsOptions;
+  typography?: TypographyOptions | ((palette: Palette) => TypographyOptions);
+  zIndex?: ZIndexOptions;
 }
+export type ThemeOptionFunction = (theme: Theme) => Theme;
 
 // {
 //   shape?: ShapeOptions;

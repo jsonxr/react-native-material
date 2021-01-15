@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Text, TextStyle } from 'react-native';
 import createStyles from './Typography.styles';
-import { useTheme } from '../styles/useTheme/useTheme';
+import { useTheme } from '../styles/Theme/useTheme';
 import { TypographyVariant } from '../styles/typography';
 import { Palette } from '../styles/Palette';
 

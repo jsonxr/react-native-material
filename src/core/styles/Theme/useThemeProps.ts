@@ -1,6 +1,4 @@
-//import { getThemeProps } from '@material-ui/styles';
-import { Components } from './components';
-import getThemeProps from './getThemeProps/getThemeProps';
+import getThemeProps from './getThemeProps';
 import { useTheme } from './useTheme';
 
 export interface ThemeWithProps<Components> {

@@ -1,4 +1,4 @@
-import createMuiTheme from './createMuiTheme';
+import createMuiTheme from '../createMuiTheme';
 import { Theme } from './Theme';
 
 const defaultTheme: Theme = createMuiTheme();

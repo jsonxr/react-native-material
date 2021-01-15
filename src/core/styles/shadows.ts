@@ -1,10 +1,11 @@
-import { ViewStyle, Platform, StyleSheet } from 'react-native';
+import { ViewStyle, Platform } from 'react-native';
+import { ElevationType } from '../Paper/Paper';
 
-const createShadowAndroid = (elevation: number): ViewStyle => ({
+const createShadowAndroid = (elevation: ElevationType): ViewStyle => ({
   elevation,
 });
 
-const createShadowIos = (elevation: number): ViewStyle => {
+const createShadowIos = (elevation: ElevationType): ViewStyle => {
   if (elevation === 0) {
     return { shadowColor: 'transparent', zIndex: 0 };
   }
@@ -21,7 +22,7 @@ const createShadowIos = (elevation: number): ViewStyle => {
   };
 };
 
-const createShadow = (elevation: number): ViewStyle => {
+const createShadow = (elevation: ElevationType): ViewStyle => {
   switch (Platform.OS) {
     case 'android':
       return createShadowAndroid(elevation);
@@ -31,35 +32,33 @@ const createShadow = (elevation: number): ViewStyle => {
   return {};
 };
 
-const shadows = StyleSheet.create({
-  0: createShadow(0),
-  1: createShadow(1),
-  2: createShadow(2),
-  3: createShadow(3),
-  4: createShadow(4),
-  5: createShadow(5),
-  6: createShadow(6),
-  7: createShadow(7),
-  8: createShadow(8),
-  9: createShadow(9),
-  10: createShadow(10),
-  11: createShadow(11),
-  12: createShadow(12),
-  13: createShadow(13),
-  14: createShadow(14),
-  15: createShadow(15),
-  16: createShadow(16),
-  17: createShadow(17),
-  18: createShadow(18),
-  19: createShadow(19),
-  20: createShadow(20),
-  21: createShadow(21),
-  22: createShadow(22),
-  23: createShadow(23),
-  24: createShadow(24),
-  25: createShadow(25),
-});
+export const shadows = [
+  createShadow(0),
+  createShadow(1),
+  createShadow(2),
+  createShadow(3),
+  createShadow(4),
+  createShadow(5),
+  createShadow(6),
+  createShadow(7),
+  createShadow(8),
+  createShadow(9),
+  createShadow(10),
+  createShadow(11),
+  createShadow(12),
+  createShadow(13),
+  createShadow(14),
+  createShadow(15),
+  createShadow(16),
+  createShadow(17),
+  createShadow(18),
+  createShadow(19),
+  createShadow(20),
+  createShadow(21),
+  createShadow(22),
+  createShadow(23),
+  createShadow(24),
+  createShadow(25),
+];
 
-export type ShadowType = typeof shadows;
-
-export default shadows;
+export type Shadows = typeof shadows;

@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react-native';
 import { ThemeDecorator } from '../../../storybook/decorators';
 
 import { Typography } from '../..';
-import { useTheme } from '../styles/useTheme/useTheme';
+import { useTheme } from '../styles/Theme/useTheme';
 
 storiesOf('Typography', module)
   .addDecorator(ThemeDecorator)
