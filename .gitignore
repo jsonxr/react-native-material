@@ -1,6 +1,7 @@
 .materialui
 package-lock.json
 yarn.lock
+android/app/src/main/assets/
 
 # OSX
 #
