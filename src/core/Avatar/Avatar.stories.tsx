@@ -26,71 +26,74 @@ const avatar2 = require('../../../assets/images/avatars/2.jpg');
 const avatar3 = require('../../../assets/images/avatars/3.jpg');
 const avatar4 = require('../../../assets/images/avatars/4.jpg');
 
+const styles = StyleSheet.create({
+  root: {},
+  avatarRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 5,
+  },
+  red: {
+    color: '#fafafa',
+    backgroundColor: red[500],
+  },
+  orange: {
+    color: '#ffffff',
+    backgroundColor: orange[500],
+  },
+  yellow: {
+    color: '#ffffff',
+    backgroundColor: yellow[500],
+  },
+  green: {
+    color: '#ffffff',
+    backgroundColor: green[500],
+  },
+  blue: {
+    color: '#ffffff',
+    backgroundColor: blue[500],
+  },
+  purple: {
+    color: '#ffffff',
+    backgroundColor: purple[500],
+  },
+});
+
 const AvatarRow = ({ children }: { children: ReactNode }) => (
-  <View
-    style={{
-      flexDirection: 'row',
-      alignItems: 'center',
-      margin: 5,
-    }}
-  >
-    {children}
-  </View>
+  <View style={styles.avatarRow}>{children}</View>
 );
 
 storiesOf('Avatar', module)
   .addDecorator(ThemeDecorator)
   .addDecorator(DefaultDecorator)
   .add('Default', () => {
-    const theme = useTheme();
-
-    const avatarStyles = StyleSheet.create({
-      red: {
-        color: theme.palette.getContrastText(red[500]),
-        backgroundColor: red[500],
-      },
-      orange: {
-        color: theme.palette.getContrastText(orange[500]),
-        backgroundColor: orange[500],
-      },
-      yellow: {
-        color: theme.palette.getContrastText(yellow[500]),
-        backgroundColor: yellow[500],
-      },
-      green: {
-        color: theme.palette.getContrastText(green[500]),
-        backgroundColor: green[500],
-      },
-      blue: {
-        color: theme.palette.getContrastText(blue[500]),
-        backgroundColor: blue[500],
-      },
-      purple: {
-        color: theme.palette.getContrastText(purple[500]),
-        backgroundColor: purple[500],
-      },
-    });
-
+    return (
+      <Avatar size={100} style={styles.red}>
+        O
+      </Avatar>
+    );
+  })
+  .add('Default2', () => {
     return (
       <View style={styles.root}>
         <AvatarRow>
-          <Avatar size="small" style={avatarStyles.red}>
+          <Avatar size="small" style={styles.red}>
             S
           </Avatar>
-          <Avatar style={avatarStyles.orange}>M</Avatar>
-          <Avatar size="large" style={avatarStyles.yellow}>
+          <Avatar style={styles.orange}>M</Avatar>
+          <Avatar size="large" style={styles.yellow}>
             L
           </Avatar>
         </AvatarRow>
 
         <AvatarRow>
-          <Avatar variant="rounded" size="small" style={avatarStyles.green}>
+          <Avatar variant="rounded" size="small" style={styles.green}>
             R
           </Avatar>
-          <Avatar variant="rounded" size="medium" style={avatarStyles.blue}>
+          <Avatar variant="rounded" size="medium" style={styles.blue}>
             R
           </Avatar>
-          <Avatar variant="rounded" size="large" style={avatarStyles.purple}>
+          <Avatar variant="rounded" size="large" style={styles.purple}>
             R
           </Avatar>
         </AvatarRow>
@@ -155,7 +158,3 @@ storiesOf('Avatar', module)
       </View>
     );
   });
-
-const styles = StyleSheet.create({
-  root: {},
-});

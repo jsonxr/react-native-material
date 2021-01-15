@@ -22,16 +22,37 @@ import {
   Typography,
 } from '../..';
 
+const styles = StyleSheet.create({
+  card: {
+    width: 100,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  view: {
+    flexDirection: 'row',
+    margin: 10,
+    width: '100%',
+    justifyContent: 'space-around',
+  },
+  simple: {
+    margin: 10,
+  },
+  marginBottom: {
+    marginBottom: 12,
+  },
+});
+
 const SimpleCard = (props: CardProps) => (
-  <Card style={{ margin: 10 }} {...props}>
+  <Card style={styles.simple} {...props}>
     <CardContent>
       <Typography color="textSecondary" gutterBottom text="Word of the Day" />
-      <Typography variant="h5" text={`be•nev•o•lent`}></Typography>
+      <Typography variant="h5" text={'be•nev•o•lent'} />
       <Typography
         //className={classes.pos}
         color="textSecondary"
         text="adjective"
-        style={{ marginBottom: 12 }}
+        style={styles.marginBottom}
       />
       <Typography variant="body2">well meaning and kindly.</Typography>
       <Typography variant="body2">"a benevolent smile"</Typography>
@@ -137,18 +158,3 @@ storiesOf('Card', module)
       </View>
     );
   });
-
-const styles = StyleSheet.create({
-  card: {
-    width: 100,
-    height: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  view: {
-    flexDirection: 'row',
-    margin: 10,
-    width: '100%',
-    justifyContent: 'space-around',
-  },
-});

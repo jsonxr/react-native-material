@@ -12,7 +12,7 @@ storiesOf('Collapse', module)
   .addDecorator(DefaultDecorator)
   .add('Default', () => (
     <View style={styles.root}>
-      <Collapse></Collapse>
+      <Collapse />
     </View>
   ));
 

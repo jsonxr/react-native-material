@@ -1,4 +1,4 @@
-import { PixelRatio, TextStyle } from 'react-native';
+import { /*PixelRatio,*/ TextStyle } from 'react-native';
 import { deepmerge } from '../../../utils';
 import { Palette } from '../Palette';
 import {
@@ -41,17 +41,17 @@ export default function createTypography(
   } = typeof typography === 'function' ? typography(palette) : typography;
 
   const defaultFontFn: FontVariantFunction = (
-    htmlFontSize: number,
+    ahtmlFontSize: number,
     fontWeight: FontWeight,
-    fontSize: number,
+    afontSize: number,
     lineHeight: number,
     letterSpacing: number,
     textTransform?: FontTextTransform
   ): TextStyle => ({
     fontFamily,
     fontWeight,
-    fontSize,
-    lineHeight: lineHeight * htmlFontSize,
+    fontSize: afontSize,
+    lineHeight: lineHeight * ahtmlFontSize,
     letterSpacing,
     textTransform,
   });

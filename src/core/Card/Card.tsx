@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
-import { Animated, ViewStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 import createStyles from './Card.styles';
-import { useTheme } from '../styles/useTheme';
 import { Paper, PaperVariant } from '../Paper/Paper';
 
 export interface CardProps {
@@ -16,8 +15,7 @@ export const Card = ({
   variant = 'elevation',
   ...props
 }: CardProps) => {
-  const theme = useTheme();
-  const styles = createStyles(theme);
+  const styles = createStyles();
   //
   return (
     <Paper

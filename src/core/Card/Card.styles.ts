@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { Theme } from '../styles';
 
-const createStyles = (theme: Theme) => {
+const createStyles = () => {
   return StyleSheet.create({
     root: {},
   });

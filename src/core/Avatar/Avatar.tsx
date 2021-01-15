@@ -1,8 +1,9 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import {
   Image,
   ImageSourcePropType,
   StyleSheet,
+  Text,
   TextStyle,
   View,
   ViewStyle,
@@ -10,8 +11,6 @@ import {
 import createStyles from './Avatar.styles';
 import { useTheme } from '../styles/useTheme';
 import { Theme } from '../styles/Theme';
-import { Typography } from '../Typography/Typography';
-import { Icon } from '../Icon/Icon';
 
 type AvatarSize = number | 'small' | 'medium' | 'large';
 
@@ -27,6 +26,63 @@ const calculateSize = (theme: Theme, size: AvatarSize): number => {
     case 'large':
       return theme.spacing(7);
   }
+};
+
+const calculateViewStyles = (
+  theme: Theme,
+  rootStyle: ViewStyle,
+  variant: 'rounded' | 'square' | 'circular',
+  width: number,
+  style: (ViewStyle & TextStyle) | undefined
+) => {
+  const styles: ViewStyle[] = [];
+  styles.push(rootStyle);
+
+  // Default color of avatar
+  const backgroundColor =
+    theme.palette.mode === 'light'
+      ? theme.palette.grey[400]
+      : theme.palette.grey[600];
+  styles.push({
+    backgroundColor,
+  });
+
+  // circle, rounded, or square
+  switch (variant) {
+    case 'rounded':
+      styles.push({ borderRadius: theme.shape.borderRadius });
+      break;
+    case 'square':
+      styles.push({ borderRadius: 0 });
+      break;
+    default:
+      styles.push({ borderRadius: width / 2 });
+  }
+
+  if (style) {
+    styles.push(style);
+  }
+
+  return StyleSheet.flatten(styles);
+};
+
+const calculateTextStyle = (
+  theme: Theme,
+  style: (ViewStyle & TextStyle) | undefined,
+  width: number
+): TextStyle => {
+  // Text Color
+  const textStyles: TextStyle[] = [{ fontSize: width / 2 }];
+  let textColor: any = theme.palette.background.default;
+  if (style?.color) {
+    textStyles.push({ color: textColor });
+  }
+
+  textStyles.push({
+    fontFamily: theme.typography.variants.body1.fontFamily,
+  });
+
+  return StyleSheet.flatten(textStyles);
 };
 
 export interface AvatarProps {
@@ -45,57 +101,29 @@ export const Avatar = ({
 }: AvatarProps) => {
   const theme = useTheme();
   const width = calculateSize(theme, size);
+  const defaultStyle = createStyles(width);
 
-  const viewStyles: ViewStyle[] = [];
-  const defaultStyle = createStyles(theme, width);
-  viewStyles.push(defaultStyle.root);
-
-  // Default color of avatar
-  const backgroundColor =
-    theme.palette.mode === 'light'
-      ? theme.palette.grey[400]
-      : theme.palette.grey[600];
-  viewStyles.push({
-    backgroundColor,
-  });
-
-  // circle, rounded, or square
-  switch (variant) {
-    case 'rounded':
-      viewStyles.push({ borderRadius: theme.shape.borderRadius });
-      break;
-    case 'square':
-      viewStyles.push({ borderRadius: 0 });
-      break;
-    default:
-      viewStyles.push(defaultStyle.circle);
-  }
-
-  // Text Color
-  const textStyles: TextStyle[] = [defaultStyle.text];
-  let textColor: any = theme.palette.background.default;
-  if (style) {
-    viewStyles.push(style);
-    if (style.color) {
-      textColor = style.color;
-    }
-  }
-  textStyles.push({ color: textColor });
-
-  console.log('textColor: ', textStyles);
+  const viewStyle = calculateViewStyles(
+    theme,
+    defaultStyle.root,
+    variant,
+    width,
+    style
+  );
+  const textStyle = calculateTextStyle(theme, style, width);
 
   return (
-    <View style={StyleSheet.flatten(viewStyles)}>
+    <View style={viewStyle}>
       {typeof children === 'string' ? (
-        <Typography style={StyleSheet.flatten(textStyles)}>
-          {`${children}`}
-        </Typography>
+        <>
+          <Text style={textStyle}>{`${children}`}</Text>
+        </>
       ) : (
         // Icons
         React.Children.map(children as any, (child) => {
           return React.cloneElement<ReactNode>(child!, {
             style: {
-              color: textColor,
+              color: textStyle.color,
               ...child.props?.style,
             },
           } as any);

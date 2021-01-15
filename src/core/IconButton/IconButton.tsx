@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 import { View, ViewStyle } from 'react-native';
 import createStyles from './IconButton.styles';
 import { useTheme } from '../styles/useTheme';

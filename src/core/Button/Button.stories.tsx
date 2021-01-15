@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { action } from '@storybook/addon-actions';
@@ -27,13 +27,13 @@ export const ButtonsGrid = ({ ...props }: ButtonsRowProps) => {
 
   return (
     <View>
-      {variants.map((variant, i) => (
+      {variants.map((variant) => (
         <View>
           <Text>{variant.toString()}</Text>
           <View style={styles.buttonRow}>
-            {sizes.map((size, j) => (
+            {sizes.map((size) => (
               <View>
-                {colors.map((color, k) => (
+                {colors.map((color) => (
                   <Button
                     {...props}
                     variant={variant}
@@ -50,11 +50,7 @@ export const ButtonsGrid = ({ ...props }: ButtonsRowProps) => {
   );
 };
 
-export const ButtonsRow = ({
-  variants,
-  children,
-  ...props
-}: ButtonsRowProps) => (
+export const ButtonsRow = ({ variants, ...props }: ButtonsRowProps) => (
   <View style={styles.buttonRow}>
     {variants?.map((b, i) => (
       <Button key={i} {...props} {...b} />

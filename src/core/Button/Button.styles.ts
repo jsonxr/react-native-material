@@ -11,7 +11,7 @@ const createStyles = (theme: Theme) => {
     padding: 0,
   };
 
-  const contained = (theme: Theme, backgroundColor: string): ViewStyle => ({
+  const contained = (backgroundColor: string): ViewStyle => ({
     ...root,
     backgroundColor,
     ...theme.shadows[4],
@@ -34,9 +34,9 @@ const createStyles = (theme: Theme) => {
     containedPrimaryColor: { color: primaryContrast },
     containedSecondaryColor: { color: secondaryContrast },
     containedDefaultColor: { color: greyContrast },
-    containedPrimaryView: contained(theme, primary),
-    containedSecondaryView: contained(theme, secondary),
-    containedDefaultView: contained(theme, grey),
+    containedPrimaryView: contained(primary),
+    containedSecondaryView: contained(secondary),
+    containedDefaultView: contained(grey),
 
     // outlined
     outlinedPrimaryColor: { color: primary },

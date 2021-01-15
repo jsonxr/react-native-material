@@ -18,6 +18,7 @@ export interface TypographyProps {
   color?: TypographyColor;
   variant?: TypographyVariant;
   gutterBottom?: boolean;
+  noWrap?: boolean;
   paragraph?: boolean;
 
   h1?: boolean;
@@ -75,6 +76,7 @@ export const Typography = ({
   style,
   color,
   variant,
+  noWrap,
   ...variants
 }: TypographyProps) => {
   const theme = useTheme();
@@ -104,6 +106,14 @@ export const Typography = ({
 
   if (gutterBottom) {
     computedStyles.push(styles.textGutterBotton);
+  }
+
+  if (paragraph) {
+    computedStyles.push(styles.paragraph);
+  }
+
+  if (noWrap) {
+    computedStyles.push(styles.noWrap);
   }
 
   if (text) {

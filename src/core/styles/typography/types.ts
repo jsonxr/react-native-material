@@ -1,5 +1,5 @@
 import { TextStyle } from 'react-native';
-import { FontWeight, FontStyle, FontVariantFunction } from './fonts/Font';
+import { FontWeight, FontVariantFunction } from './fonts/Font';
 import { Palette } from '../Palette';
 
 export type TypographyVariant =

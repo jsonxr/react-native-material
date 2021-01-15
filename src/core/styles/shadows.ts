@@ -1,6 +1,4 @@
 import { ViewStyle, Platform, StyleSheet } from 'react-native';
-import { Theme } from './Theme';
-import { Palette } from './Palette';
 
 const createShadowAndroid = (elevation: number): ViewStyle => ({
   elevation,

@@ -4,7 +4,7 @@ import { Theme } from '../styles';
 const createStyles = (theme: Theme) => {
   return StyleSheet.create({
     root: {
-      padding: 16,
+      padding: theme.spacing(2),
     },
   });
 };

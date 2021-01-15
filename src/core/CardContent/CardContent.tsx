@@ -1,5 +1,5 @@
-import React, { ReactNode, ReactElement } from 'react';
-import { View, ViewProps } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import createStyles from './CardContent.styles';
 import { useTheme } from '../styles/useTheme';
 

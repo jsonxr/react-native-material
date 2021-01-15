@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 import { Pressable, View, ViewStyle } from 'react-native';
-import createStyles from './ButtonBase.styles';
-import { useTheme, Theme } from '../styles';
 
 export interface ButtonBaseProps {
   style?: ViewStyle;
@@ -11,9 +9,6 @@ export interface ButtonBaseProps {
 }
 
 export const ButtonBase = ({ style, children, onPress }: ButtonBaseProps) => {
-  const theme: Theme = useTheme();
-  const styles = createStyles(theme);
-
   // Calculate Color style
   const rootStyle: ViewStyle[] = [];
   if (style) {

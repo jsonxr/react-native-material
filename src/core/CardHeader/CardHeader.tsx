@@ -1,8 +1,5 @@
 import React, { ReactNode } from 'react';
 import { View } from 'react-native';
-import { Theme } from '../styles/Theme';
-import { Typography } from '../Typography';
-import createStyles from './CardHeader.styles';
 
 export interface CardHeaderProps {
   avatar?: any;

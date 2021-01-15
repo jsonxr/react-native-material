@@ -5,7 +5,7 @@ const createStyles = (theme: Theme) => {
   return StyleSheet.create({
     root: {
       alignItems: 'flex-start',
-      padding: 8,
+      padding: theme.spacing(1),
     },
   });
 };

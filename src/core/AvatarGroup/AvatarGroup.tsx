@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { View } from 'react-native';
 import { Avatar } from '../Avatar/Avatar';
 import { useTheme } from '../styles';
+import createStyles from './AvatarGroup.styles';
 
 const REACT_FRAGMENT_TYPE = Symbol.for('react.fragment');
 const REACT_ELEMENT_TYPE = Symbol.for('react.element');
@@ -28,6 +29,7 @@ export const AvatarGroup = ({
   children: childrenProp,
 }: AvatarGroupProps) => {
   const theme = useTheme();
+  const styles = createStyles(theme, spacing);
   const clampedMax = max < 2 ? 2 : max;
 
   const children = React.Children.toArray(childrenProp).filter((child) => {
@@ -48,17 +50,10 @@ export const AvatarGroup = ({
   const extraAvatars =
     children.length > clampedMax ? children.length - clampedMax + 1 : 0;
 
-  let marginLeft = -theme.spacing(1);
-  if (typeof spacing === 'number') {
-    marginLeft = -spacing;
-  } else if (spacing === 'small') {
-    marginLeft = -theme.spacing(2);
-  }
-
   return (
-    <View style={{ flexDirection: 'row-reverse' }}>
+    <View style={styles.root}>
       {extraAvatars ? (
-        <Avatar style={{ marginLeft }}>{`+${extraAvatars}`}</Avatar>
+        <Avatar style={styles.avatar}>{`+${extraAvatars}`}</Avatar>
       ) : null}
 
       {children
@@ -66,12 +61,7 @@ export const AvatarGroup = ({
         .reverse()
         .map((child: any) => {
           return React.cloneElement(child, {
-            style: {
-              marginLeft,
-              //...child.props?.style,
-              borderWidth: 2,
-              borderColor: theme.palette.background.default,
-            },
+            style: styles.avatar,
             variant: child.props.variant || variant,
           } as any);
         })}

@@ -1,7 +1,7 @@
 import React from 'react';
 import ThemeContext from './ThemeContext';
 import { useTheme } from './useTheme';
-import nested from './nested';
+//import nested from './nested';
 import { deepmerge } from '../../utils';
 import { Theme } from './Theme';
 
@@ -32,7 +32,7 @@ function mergeOuterLocalTheme(
 
 export interface ThemeProviderProps {
   children: any;
-  theme: Theme;
+  theme: Partial<Theme>;
 }
 
 /**

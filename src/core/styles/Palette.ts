@@ -1,4 +1,3 @@
-import { deepmerge } from '../../utils';
 import grey from '../colors/grey';
 import {
   Color,

@@ -1,7 +1,6 @@
-import { StyleSheet, ViewStyle } from 'react-native';
-import { Theme } from '../styles';
+import { StyleSheet } from 'react-native';
 
-const createStyles = (theme: Theme) => {
+const createStyles = () => {
   return StyleSheet.create({});
 };
 

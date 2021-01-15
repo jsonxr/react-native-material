@@ -15,9 +15,9 @@ export const CardActions = ({ style, children }: CardActionsProps) => {
     computedStyle.push(style);
   }
   computedStyle.push(styles.root);
-  const arr = React.Children.map(children, (child) =>
-    console.log('Child: ', child)
-  );
+  // const arr = React.Children.map(children, (child) =>
+  //   console.log('Child: ', child)
+  // );
 
   return <View style={computedStyle}>{children}</View>;
 };

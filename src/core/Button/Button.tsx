@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Text, Pressable, StyleSheet, View, ViewStyle } from 'react-native';
+import { Text, ViewStyle } from 'react-native';
 import { ButtonBase } from '../ButtonBase/ButtonBase';
 import createStyles from './Button.styles';
 import { useTheme, Theme } from '../styles';

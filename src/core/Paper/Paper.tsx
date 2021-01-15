@@ -1,7 +1,7 @@
-import React, { ReactNode, useMemo } from 'react';
-import { Animated, View, ViewStyle } from 'react-native';
+import React, { ReactNode } from 'react';
+import { View, ViewStyle } from 'react-native';
 import createStyles from './Paper.styles';
-import { useTheme, Theme } from '../styles';
+import { useTheme } from '../styles';
 
 export type ElevationType =
   | 0
@@ -62,30 +62,30 @@ export const elevations: ElevationType[] = [
 
 export type PaperVariant = 'elevation' | 'outlined';
 
-const calculateStyle = (
-  theme: Theme,
-  square?: boolean,
-  variant?: PaperVariant,
-  style?: ViewStyle,
-  elevation?: ElevationType
-) => {
-  const viewStyles: any = useMemo(() => {
-    const styles = createStyles(theme);
-    const viewStyles: any = [styles.paper];
-    if (!square) {
-      viewStyles.push(styles.rounded);
-    }
-    if (variant === 'outlined') {
-      viewStyles.push(styles.outlined);
-    } else if (elevation) {
-      viewStyles.push(theme.shadows[elevation]);
-    }
-    if (style) {
-      viewStyles.push(style);
-    }
-  }, [theme, square, variant, style, elevation]);
-  return viewStyles;
-};
+// const calculateStyle = (
+//   theme: Theme,
+//   square?: boolean,
+//   variant?: PaperVariant,
+//   style?: ViewStyle,
+//   elevation?: ElevationType
+// ) => {
+//   const viewStyles: any = useMemo(() => {
+//     const styles = createStyles(theme);
+//     const viewStyles: any = [styles.paper];
+//     if (!square) {
+//       viewStyles.push(styles.rounded);
+//     }
+//     if (variant === 'outlined') {
+//       viewStyles.push(styles.outlined);
+//     } else if (elevation) {
+//       viewStyles.push(theme.shadows[elevation]);
+//     }
+//     if (style) {
+//       viewStyles.push(style);
+//     }
+//   }, [theme, square, variant, style, elevation]);
+//   return viewStyles;
+// };
 
 export interface PaperProps {
   elevation?: ElevationType;

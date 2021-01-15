@@ -27,6 +27,14 @@ const createStyles = (theme: Theme) =>
     textGutterBotton: {
       marginBottom: theme.typography.htmlFontSize * 0.35,
     },
+    noWrap: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+    },
+    paragraph: {
+      marginBottom: theme.spacing(2),
+    },
   });
 
 export default createStyles;
