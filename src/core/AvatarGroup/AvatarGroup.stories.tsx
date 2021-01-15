@@ -1,5 +1,5 @@
-import React, { ReactElement, ReactNode } from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import {
   ThemeDecorator,
@@ -9,13 +9,13 @@ import {
 import { Avatar, AvatarGroup } from '../..';
 
 const avatars = [
-  require('../../assets/images/avatars/1.jpg'),
-  require('../../assets/images/avatars/2.jpg'),
-  require('../../assets/images/avatars/3.jpg'),
-  require('../../assets/images/avatars/4.jpg'),
-  require('../../assets/images/avatars/5.jpg'),
-  require('../../assets/images/avatars/6.jpg'),
-  require('../../assets/images/avatars/7.jpg'),
+  require('../../../assets/images/avatars/1.jpg'),
+  require('../../../assets/images/avatars/2.jpg'),
+  require('../../../assets/images/avatars/3.jpg'),
+  require('../../../assets/images/avatars/4.jpg'),
+  require('../../../assets/images/avatars/5.jpg'),
+  require('../../../assets/images/avatars/6.jpg'),
+  require('../../../assets/images/avatars/7.jpg'),
 ];
 
 storiesOf('AvatarGroup', module)

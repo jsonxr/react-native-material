@@ -7,5 +7,4 @@ import '../src/core/Collapse/Collapse.stories';
 import '../src/core/Icon/Icon.stories';
 import '../src/core/IconButton/IconButton.stories';
 import '../src/core/Paper/Paper.stories';
-import '../src/RippleButton/RippleButton.stories';
 import '../src/core/Typography/Typography.stories';

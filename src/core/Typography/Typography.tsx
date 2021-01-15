@@ -54,10 +54,14 @@ const getStylenameFromVariantBools = (
   }
 
   // Error! <Typography h1 h2 /> is invalid
-  throw new Error(
-    `Typography: <Typography ${filteredStyles.join(' ')} />\n\n` +
-      `You may only specify one of ${filteredStyles.join(',')}`
-  );
+  if (process.env.NODE_ENV !== 'production') {
+    throw new Error(
+      `Typography: <Typography ${filteredStyles.join(' ')} />\n\n` +
+        `You may only specify one of ${filteredStyles.join(',')}`
+    );
+  }
+
+  return filteredStyles[0] as TypographyVariant;
 };
 
 /**

@@ -21,10 +21,10 @@ import {
   yellow,
 } from '../../core/colors';
 
-const avatar1 = require('../../assets/images/avatars/1.jpg');
-const avatar2 = require('../../assets/images/avatars/2.jpg');
-const avatar3 = require('../../assets/images/avatars/3.jpg');
-const avatar4 = require('../../assets/images/avatars/4.jpg');
+const avatar1 = require('../../../assets/images/avatars/1.jpg');
+const avatar2 = require('../../../assets/images/avatars/2.jpg');
+const avatar3 = require('../../../assets/images/avatars/3.jpg');
+const avatar4 = require('../../../assets/images/avatars/4.jpg');
 
 const AvatarRow = ({ children }: { children: ReactNode }) => (
   <View

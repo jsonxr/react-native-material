@@ -64,12 +64,7 @@ storiesOf('Typography', module)
         <Typography h6 color="textSecondary" text="textSecondary" />
       </ScrollView>
     );
-  })
-  .add('Simplified Variants Exception', () => (
-    <ScrollView style={styles.view} contentContainerStyle={{}}>
-      <Typography h1 h2 h3 text="error" />
-    </ScrollView>
-  ));
+  });
 
 const styles = StyleSheet.create({
   view: { borderWidth: 1, borderColor: 'red', width: '100%', height: '100%' },

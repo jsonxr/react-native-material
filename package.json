@@ -1,7 +1,25 @@
 {
-  "name": "@jsonxr/material",
+  "name": "@jsonxr/material-ui",
   "version": "0.0.1",
   "private": true,
+  "repository": "git@github.com:jsonxr/js-promises.git",
+  "author": "Jason Rowland <jsonxr@gmail.com>",
+  "license": "MIT",
+
+  "main": "lib/cjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./lib/cjs/index.js",
+      "import": "./lib/index.js"
+    }
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
