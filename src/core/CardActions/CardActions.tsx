@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { View, ViewProps } from 'react-native';
 import createStyles from './CardActions.styles';
-import { useTheme } from '../styles/useTheme';
+import { useTheme } from '../styles/useTheme/useTheme';
 
 export interface CardActionsProps extends ViewProps {
   children?: ReactNode;

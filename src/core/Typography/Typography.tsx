@@ -1,15 +1,18 @@
 import React, { ReactNode } from 'react';
 import { Text, TextStyle } from 'react-native';
 import createStyles from './Typography.styles';
-import { useTheme } from '../styles/useTheme';
+import { useTheme } from '../styles/useTheme/useTheme';
 import { TypographyVariant } from '../styles/typography';
+import { Palette } from '../styles/Palette';
 
 export type TypographyColor =
-  | 'error'
+  | 'initial'
+  | 'inherit'
   | 'primary'
   | 'secondary'
   | 'textPrimary'
-  | 'textSecondary';
+  | 'textSecondary'
+  | 'error';
 
 export interface TypographyProps {
   text?: string;
@@ -37,6 +40,15 @@ export interface TypographyProps {
   caption?: boolean;
   overline?: boolean;
 }
+
+const getTextColor = (color: TypographyColor, palette: Palette): string => {
+  switch (color) {
+    case 'textPrimary':
+      return palette.text.primary;
+    case 'textSecondary':
+      return palette.text.secondary;
+  }
+};
 
 const getStylenameFromVariantBools = (
   styles: Record<string, any>,
@@ -99,11 +111,6 @@ export const Typography = ({
     computedStyles.push(colorStyle);
   }
 
-  // style
-  if (style) {
-    computedStyles.push(style);
-  }
-
   if (gutterBottom) {
     computedStyles.push(styles.textGutterBotton);
   }
@@ -116,9 +123,10 @@ export const Typography = ({
     computedStyles.push(styles.noWrap);
   }
 
-  if (text) {
-    return <Text style={computedStyles}>{text}</Text>;
+  // style
+  if (style) {
+    computedStyles.push(style);
   }
 
-  return <Text style={computedStyles}>{children}</Text>;
+  return <Text style={computedStyles}>{text ?? children}</Text>;
 };

@@ -1,21 +1,24 @@
-import { StyleSheet } from 'react-native';
+import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 
-const createStyles = (size: number) => {
+export interface AvatarStyles {
+  root?: ViewStyle;
+  image?: ImageStyle;
+  text?: TextStyle;
+}
+const createStyles = (styles?: AvatarStyles) => {
   return StyleSheet.create({
     root: {
-      width: size,
-      height: size,
+      ...styles?.root,
       overflow: 'hidden',
       justifyContent: 'center',
       alignItems: 'center',
     },
-    circle: {
-      borderRadius: size / 2,
-    },
     image: {
-      width: size,
-      height: size,
+      ...styles?.image,
       resizeMode: 'contain',
+    },
+    text: {
+      ...styles?.text,
     },
   });
 };

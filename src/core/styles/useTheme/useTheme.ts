@@ -1,9 +1,8 @@
 import React from 'react';
-
-import { Theme } from './Theme';
+import { Theme } from '../Theme';
 import ThemeContext from './ThemeContext';
 
-export function useTheme() {
+export function useTheme(): Theme {
   const theme = React.useContext<Theme>(ThemeContext);
 
   if (process.env.NODE_ENV !== 'production') {

@@ -1,6 +1,6 @@
-import createTheme from './createTheme';
+import createMuiTheme from './createMuiTheme';
 import { Theme } from './Theme';
 
-const defaultTheme: Theme = createTheme();
+const defaultTheme: Theme = createMuiTheme();
 
 export default defaultTheme;

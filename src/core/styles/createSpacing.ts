@@ -5,9 +5,7 @@ export interface Spacing {
   (value: number): number;
 }
 
-const createSpacing = (
-  spacingInput: SpacingOptions | undefined = 8
-): Spacing => {
+const createSpacing = (spacingInput: SpacingOptions = 8): Spacing => {
   if (typeof spacingInput === 'number') {
     return (value?: number): number => (value ?? 1) * spacingInput;
   }

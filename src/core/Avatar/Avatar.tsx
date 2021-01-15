@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import {
   Image,
   ImageSourcePropType,
+  ImageStyle,
   StyleSheet,
   Text,
   TextStyle,
@@ -9,8 +10,9 @@ import {
   ViewStyle,
 } from 'react-native';
 import createStyles from './Avatar.styles';
-import { useTheme } from '../styles/useTheme';
+import { useTheme } from '../styles/useTheme/useTheme';
 import { Theme } from '../styles/Theme';
+import useThemeProps from '../styles/useThemeProps';
 
 type AvatarSize = number | 'small' | 'medium' | 'large';
 
@@ -59,6 +61,8 @@ const calculateViewStyles = (
       styles.push({ borderRadius: width / 2 });
   }
 
+  styles.push({ width: width, height: width });
+
   if (style) {
     styles.push(style);
   }
@@ -68,14 +72,19 @@ const calculateViewStyles = (
 
 const calculateTextStyle = (
   theme: Theme,
+  textStyle: TextStyle,
   style: (ViewStyle & TextStyle) | undefined,
   width: number
 ): TextStyle => {
   // Text Color
-  const textStyles: TextStyle[] = [{ fontSize: width / 2 }];
+  const textStyles: TextStyle[] = [textStyle];
+
+  textStyles.push({ fontSize: width / 2 });
+
   let textColor: any = theme.palette.background.default;
+  textStyles.push({ color: textColor });
   if (style?.color) {
-    textStyles.push({ color: textColor });
+    textStyles.push({ color: style.color });
   }
 
   textStyles.push({
@@ -85,6 +94,12 @@ const calculateTextStyle = (
   return StyleSheet.flatten(textStyles);
 };
 
+const calculateImageStyle = (imageStyle: ImageStyle, width: number) => {
+  const imageStyles: ImageStyle[] = [imageStyle];
+  imageStyles.push({ width: width, height: width });
+  return StyleSheet.flatten(imageStyles);
+};
+
 export interface AvatarProps {
   size?: number | 'small' | 'medium' | 'large';
   style?: ViewStyle & TextStyle;
@@ -92,16 +107,21 @@ export interface AvatarProps {
   children?: ReactNode;
   variant?: 'rounded' | 'square' | 'circular';
 }
-export const Avatar = ({
-  children,
-  size = 'medium',
-  style,
-  source,
-  variant = 'circular',
-}: AvatarProps) => {
+export const Avatar = (inProps: AvatarProps) => {
+  const props = useThemeProps({ props: inProps, name: 'MuiAvatar' });
+  const {
+    children,
+    size = 'medium',
+    style,
+    source,
+    variant = 'circular',
+  } = props;
+
   const theme = useTheme();
   const width = calculateSize(theme, size);
-  const defaultStyle = createStyles(width);
+  const defaultStyle = createStyles(
+    theme.components?.MuiAvatar?.styleOverrides
+  );
 
   const viewStyle = calculateViewStyles(
     theme,
@@ -110,7 +130,8 @@ export const Avatar = ({
     width,
     style
   );
-  const textStyle = calculateTextStyle(theme, style, width);
+  const textStyle = calculateTextStyle(theme, defaultStyle.text, style, width);
+  const imageStyle = calculateImageStyle(defaultStyle.image, width);
 
   return (
     <View style={viewStyle}>
@@ -131,7 +152,7 @@ export const Avatar = ({
       )}
       {source && (
         <Image
-          style={defaultStyle.image}
+          style={imageStyle}
           width={width}
           height={width}
           source={source}

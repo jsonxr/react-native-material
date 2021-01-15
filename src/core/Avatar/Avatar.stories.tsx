@@ -10,7 +10,7 @@ import { Avatar } from '../..';
 import FolderIcon from '../../icons/Folder';
 import PageviewIcon from '../../icons/Pageview';
 import AssignmentIcon from '../../icons/Assignment';
-import { useTheme } from '../styles';
+import { ThemeOptions, ThemeProvider, useTheme } from '../styles';
 import {
   blue,
   green,
@@ -67,10 +67,26 @@ storiesOf('Avatar', module)
   .addDecorator(ThemeDecorator)
   .addDecorator(DefaultDecorator)
   .add('Default', () => {
+    const theme: ThemeOptions = {
+      components: {
+        MuiAvatar: {
+          defaultProps: {
+            size: 200,
+            variant: 'circular',
+          },
+          styleOverrides: {
+            root: {
+              borderWidth: 5,
+              borderColor: 'black',
+            },
+          },
+        },
+      },
+    };
     return (
-      <Avatar size={100} style={styles.red}>
-        O
-      </Avatar>
+      <ThemeProvider value={theme}>
+        <Avatar style={styles.red}>O</Avatar>
+      </ThemeProvider>
     );
   })
   .add('Default2', () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import createStyles from './CardContent.styles';
-import { useTheme } from '../styles/useTheme';
+import { useTheme } from '../styles/useTheme/useTheme';
 
 export interface CardContentProps {}
 export const CardContent = ({ ...props }: CardContentProps) => {

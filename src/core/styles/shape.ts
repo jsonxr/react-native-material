@@ -3,4 +3,5 @@ const shape = {
 };
 
 export default shape;
-export type ShapeType = typeof shape;
+export type Shape = typeof shape;
+export type ShapeOptions = Partial<Shape>;

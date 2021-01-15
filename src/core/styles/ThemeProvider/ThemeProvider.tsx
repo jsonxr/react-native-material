@@ -1,14 +1,14 @@
 import React from 'react';
-import ThemeContext from './ThemeContext';
-import { useTheme } from './useTheme';
+import ThemeContext from '../useTheme/ThemeContext';
+import { useTheme } from '../useTheme/useTheme';
 //import nested from './nested';
-import { deepmerge } from '../../utils';
-import { Theme } from './Theme';
+import { deepmerge } from '../../../utils';
+import { Theme, ThemeOptions } from '../Theme';
 
 // To support composition of theme.
 function mergeOuterLocalTheme(
   outerTheme: Theme,
-  localTheme: Partial<Theme>
+  localTheme: ThemeOptions | undefined
 ): Theme {
   // if (typeof localTheme === 'function') {
   //   const mergedTheme = localTheme(outerTheme);
@@ -32,7 +32,7 @@ function mergeOuterLocalTheme(
 
 export interface ThemeProviderProps {
   children: any;
-  theme: Partial<Theme>;
+  value: ThemeOptions;
 }
 
 /**
@@ -40,22 +40,16 @@ export interface ThemeProviderProps {
  * It makes the `theme` available down the React tree thanks to React context.
  * This component should preferably be used at **the root of your component tree**.
  */
-export function ThemeProvider({
-  children,
-  theme: localTheme,
-}: ThemeProviderProps) {
+export function ThemeProvider({ children, value }: ThemeProviderProps) {
   const outerTheme = useTheme();
 
-  const theme = React.useMemo(() => {
-    const output =
-      outerTheme === null
-        ? localTheme
-        : mergeOuterLocalTheme(outerTheme, localTheme);
-
-    return output;
-  }, [localTheme, outerTheme]);
+  const mergedtheme = (outerTheme === null
+    ? value
+    : mergeOuterLocalTheme(outerTheme, value)) as Theme;
 
   return (
-    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={mergedtheme}>
+      {children}
+    </ThemeContext.Provider>
   );
 }

@@ -2,16 +2,15 @@ import { deepmerge } from '../../utils';
 // import createBreakpoints from './createBreakpoints';
 // import createMixins from './createMixins';
 import createPalette from './createPalette';
-import { Theme } from './Theme';
+import { Theme, ThemeOptions } from './Theme';
 import shadows from './shadows';
 import shape from './shape';
 import createTypography from './typography/createTypography';
 import createSpacing from './createSpacing';
 // import createSpacing from './createSpacing';
 // import transitions from './transitions';
-// import zIndex from './zIndex';
 
-function createTheme(options: Partial<Theme> = {}, ...args: any[]): Theme {
+function createMuiTheme(options: ThemeOptions = {}, ...args: any[]): Theme {
   const {
     // breakpoints: breakpointsInput = {},
     // mixins: mixinsInput = {},
@@ -48,4 +47,4 @@ function createTheme(options: Partial<Theme> = {}, ...args: any[]): Theme {
   return muiTheme;
 }
 
-export default createTheme;
+export default createMuiTheme;
