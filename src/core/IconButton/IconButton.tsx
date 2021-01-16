@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { View, ViewStyle } from 'react-native';
 import createStyles from './IconButton.styles';
-import { useTheme } from '../styles/Theme/useTheme';
+import { useTheme } from '../styles/theme/useTheme';
 
 export type IconButtonEdge = 'end' | 'start';
 export type IconButtonSize = 'small' | 'medium';

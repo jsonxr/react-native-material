@@ -8,6 +8,33 @@ import {
 
 import { Paper, elevations, ElevationType } from '../..';
 
+const styles = StyleSheet.create({
+  view: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  paperLarge: {
+    margin: 10,
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    margin: 10,
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    margin: 10,
+    width: '100%',
+    justifyContent: 'space-around',
+  },
+});
+
 export const CardsView = ({ children }: any) => <View>{children}</View>;
 
 storiesOf('Paper', module)
@@ -41,30 +68,3 @@ storiesOf('Paper', module)
       </Paper>
     </View>
   ));
-
-const styles = StyleSheet.create({
-  view: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  paperLarge: {
-    margin: 10,
-    width: 100,
-    height: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  paper: {
-    margin: 10,
-    width: 50,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    margin: 10,
-    width: '100%',
-    justifyContent: 'space-around',
-  },
-});

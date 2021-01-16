@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { View } from 'react-native';
 import { Avatar } from '../Avatar/Avatar';
 import { useTheme } from '../styles';
+import useThemeProps from '../styles/theme/useThemeProps';
 import createStyles from './AvatarGroup.styles';
 
 const REACT_FRAGMENT_TYPE = Symbol.for('react.fragment');
@@ -22,14 +23,22 @@ export interface AvatarGroupProps {
   variant?: 'circular' | 'rounded' | 'square';
   children: ReactNode;
 }
-export const AvatarGroup = ({
-  max = 5,
-  spacing = 'medium',
-  variant = 'circular',
-  children: childrenProp,
-}: AvatarGroupProps) => {
+export const AvatarGroup = (inProps: AvatarGroupProps) => {
+  const props = useThemeProps({ props: inProps, name: 'MuiAvatar' });
+  const {
+    max = 5,
+    spacing = 'medium',
+    variant = 'circular',
+    children: childrenProp,
+    ...rest
+  } = props;
   const theme = useTheme();
-  const styles = createStyles(theme, spacing);
+
+  const styles = createStyles(
+    theme.components?.MuiAvatarGroup?.styleOverrides,
+    theme,
+    spacing
+  );
   const clampedMax = max < 2 ? 2 : max;
 
   const children = React.Children.toArray(childrenProp).filter((child) => {
@@ -51,7 +60,7 @@ export const AvatarGroup = ({
     children.length > clampedMax ? children.length - clampedMax + 1 : 0;
 
   return (
-    <View style={styles.root}>
+    <View style={styles.root} {...rest}>
       {extraAvatars ? (
         <Avatar style={styles.avatar}>{`+${extraAvatars}`}</Avatar>
       ) : null}

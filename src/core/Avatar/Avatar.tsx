@@ -9,14 +9,24 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import createStyles from './Avatar.styles';
-import { useTheme } from '../styles/Theme/useTheme';
-import { Theme } from '../styles/Theme/Theme';
-import useThemeProps from '../styles/Theme/useThemeProps';
+import createStyles, { AvatarStyles } from './Avatar.styles';
+import { useTheme } from '../styles/theme/useTheme';
+import { Theme } from '../styles/theme/Theme';
+import useThemeProps from '../styles/theme/useThemeProps';
 
-type AvatarSize = number | 'small' | 'medium' | 'large';
+export type AvatarSize = number | 'small' | 'medium' | 'large';
 
-const calculateSize = (theme: Theme, size: AvatarSize): number => {
+export interface AvatarProps {
+  size?: AvatarSize;
+  color?: string;
+  textColor?: string;
+  styles?: AvatarStyles;
+  source?: ImageSourcePropType;
+  children?: ReactNode;
+  variant?: 'rounded' | 'square' | 'circular';
+}
+
+const calculateSize = (theme: Theme, size: AvatarSize | undefined): number => {
   if (typeof size === 'number') {
     return size;
   }
@@ -27,30 +37,25 @@ const calculateSize = (theme: Theme, size: AvatarSize): number => {
       return theme.spacing(5);
     case 'large':
       return theme.spacing(7);
+    default:
+      return theme.spacing(5);
   }
 };
 
-const calculateViewStyles = (
+const rootStyle = (
   theme: Theme,
-  rootStyle: ViewStyle,
-  variant: 'rounded' | 'square' | 'circular',
-  width: number,
-  style: (ViewStyle & TextStyle) | undefined
+  defaultStyle?: ViewStyle,
+  props?: AvatarProps
 ) => {
-  const styles: ViewStyle[] = [];
-  styles.push(rootStyle);
+  // defaults
+  const styles: ViewStyle[] = defaultStyle ? [defaultStyle] : [];
 
-  // Default color of avatar
-  const backgroundColor =
-    theme.palette.mode === 'light'
-      ? theme.palette.grey[400]
-      : theme.palette.grey[600];
-  styles.push({
-    backgroundColor,
-  });
+  // size
+  const width = calculateSize(theme, props?.size);
+  styles.push({ width: width, height: width });
 
-  // circle, rounded, or square
-  switch (variant) {
+  // variant
+  switch (props?.variant) {
     case 'rounded':
       styles.push({ borderRadius: theme.shape.borderRadius });
       break;
@@ -61,90 +66,85 @@ const calculateViewStyles = (
       styles.push({ borderRadius: width / 2 });
   }
 
-  styles.push({ width: width, height: width });
-
-  if (style) {
-    styles.push(style);
+  // styles
+  if (props?.styles?.root) {
+    styles.push(props.styles?.root);
   }
 
   return StyleSheet.flatten(styles);
 };
 
-const calculateTextStyle = (
+const textStyle = (
   theme: Theme,
-  textStyle: TextStyle,
-  style: (ViewStyle & TextStyle) | undefined,
-  width: number
+  defaultStyle?: TextStyle,
+  props?: AvatarProps
 ): TextStyle => {
-  // Text Color
-  const textStyles: TextStyle[] = [textStyle];
+  // default
+  const styles: TextStyle[] = defaultStyle ? [defaultStyle] : [];
 
-  textStyles.push({ fontSize: width / 2 });
+  // size
+  const width = calculateSize(theme, props?.size);
+  styles.push({ fontSize: width / 2 });
 
-  let textColor: any = theme.palette.background.default;
-  textStyles.push({ color: textColor });
-  if (style?.color) {
-    textStyles.push({ color: style.color });
+  // color
+  if (props?.color) {
+    styles.push({ color: props?.color });
   }
 
-  textStyles.push({
-    fontFamily: theme.typography.variants.body1.fontFamily,
+  // styles
+  if (props?.styles?.text) {
+    styles.push(props.styles?.text);
+  }
+
+  return StyleSheet.flatten(styles);
+};
+
+const imageStyle = (
+  theme: Theme,
+  defaultStyle: ImageStyle,
+  props?: AvatarProps
+) => {
+  // default
+  const styles: ImageStyle[] = [defaultStyle];
+
+  // size
+  const width = calculateSize(theme, props?.size);
+  styles.push({ width: width, height: width });
+
+  // styles
+  if (props?.styles?.image) {
+    styles.push(props.styles.image);
+  }
+
+  return StyleSheet.flatten(styles);
+};
+
+export const Avatar = (props: AvatarProps = {}) => {
+  const { children, size = 'medium', source, ...rest } = useThemeProps({
+    props,
+    name: 'MuiAvatar',
   });
-
-  return StyleSheet.flatten(textStyles);
-};
-
-const calculateImageStyle = (imageStyle: ImageStyle, width: number) => {
-  const imageStyles: ImageStyle[] = [imageStyle];
-  imageStyles.push({ width: width, height: width });
-  return StyleSheet.flatten(imageStyles);
-};
-
-export interface AvatarProps {
-  size?: number | 'small' | 'medium' | 'large';
-  style?: ViewStyle & TextStyle;
-  source?: ImageSourcePropType;
-  children?: ReactNode;
-  variant?: 'rounded' | 'square' | 'circular';
-}
-export const Avatar = (inProps: AvatarProps) => {
-  const props = useThemeProps({ props: inProps, name: 'MuiAvatar' });
-  const {
-    children,
-    size = 'medium',
-    style,
-    source,
-    variant = 'circular',
-  } = props;
-
   const theme = useTheme();
+  const defaultStyles = createStyles(theme);
+  const styles = {
+    root: rootStyle(theme, defaultStyles.root, props),
+    text: textStyle(theme, defaultStyles.text, props),
+    image: imageStyle(theme, defaultStyles.image, props),
+  };
   const width = calculateSize(theme, size);
-  const defaultStyle = createStyles(
-    theme.components?.MuiAvatar?.styleOverrides
-  );
-
-  const viewStyle = calculateViewStyles(
-    theme,
-    defaultStyle.root,
-    variant,
-    width,
-    style
-  );
-  const textStyle = calculateTextStyle(theme, defaultStyle.text, style, width);
-  const imageStyle = calculateImageStyle(defaultStyle.image, width);
 
   return (
-    <View style={viewStyle}>
+    <View {...rest} style={styles.root}>
       {typeof children === 'string' ? (
         <>
-          <Text style={textStyle}>{`${children}`}</Text>
+          <Text style={styles.text}>{`${children}`}</Text>
         </>
       ) : (
         // Icons
         React.Children.map(children as any, (child) => {
-          return React.cloneElement<ReactNode>(child!, {
+          return React.cloneElement<ReactNode>(child, {
             style: {
-              color: textStyle.color,
+              color: styles.text.color,
               ...child.props?.style,
             },
           } as any);
@@ -152,7 +152,7 @@ export const Avatar = (inProps: AvatarProps) => {
       )}
       {source && (
         <Image
-          style={imageStyle}
+          style={styles.image}
           width={width}
           height={width}
           source={source}

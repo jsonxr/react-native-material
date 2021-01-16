@@ -8,6 +8,17 @@ import {
 import { Icon, IconName, IconColor, IconSize } from '../..';
 import materialIconMap from './MaterialIconMap';
 
+const styles = StyleSheet.create({
+  root: {},
+  iconRow: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+  },
+  icon: {
+    padding: 6,
+  },
+});
+
 storiesOf('Icon', module)
   .addDecorator(ThemeDecorator)
   .addDecorator(DefaultDecorator)
@@ -43,14 +54,3 @@ storiesOf('Icon', module)
       </ScrollView>
     );
   });
-
-const styles = StyleSheet.create({
-  root: {},
-  iconRow: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-  },
-  icon: {
-    padding: 6,
-  },
-});

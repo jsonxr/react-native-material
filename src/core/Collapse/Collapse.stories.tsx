@@ -7,6 +7,10 @@ import {
 } from '../../../storybook/decorators';
 import { Collapse } from '../..';
 
+const styles = StyleSheet.create({
+  root: {},
+});
+
 storiesOf('Collapse', module)
   .addDecorator(ThemeDecorator)
   .addDecorator(DefaultDecorator)
@@ -15,7 +19,3 @@ storiesOf('Collapse', module)
       <Collapse />
     </View>
   ));
-
-const styles = StyleSheet.create({
-  root: {},
-});

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { action } from '@storybook/addon-actions';
@@ -7,23 +7,21 @@ import {
   DefaultDecorator,
 } from '../../../storybook/decorators';
 
-import {
-  Button,
-  ButtonProps,
-  ButtonSize,
-  ButtonVariant,
-  ButtonColor,
-} from '../..';
+import { Button } from '../..';
 
-interface ButtonsRowProps extends ButtonProps {
-  variants?: Partial<ButtonProps>[];
-  children?: ReactNode;
-}
+const styles = StyleSheet.create({
+  buttonRow: {
+    flexDirection: 'row',
+    margin: 10,
+    width: '100%',
+    justifyContent: 'space-around',
+  },
+});
 
-export const ButtonsGrid = ({ ...props }: ButtonsRowProps) => {
-  const sizes: ButtonSize[] = ['small', 'medium', 'large'];
-  const variants: ButtonVariant[] = ['text', 'contained', 'outlined'];
-  const colors: ButtonColor[] = ['primary', 'secondary', 'default'];
+export const ButtonsGrid = ({ ...props }) => {
+  const sizes = ['small', 'medium', 'large'];
+  const variants = ['text', 'contained', 'outlined'];
+  const colors = ['primary', 'secondary', 'default'];
 
   return (
     <View>
@@ -50,7 +48,7 @@ export const ButtonsGrid = ({ ...props }: ButtonsRowProps) => {
   );
 };
 
-export const ButtonsRow = ({ variants, ...props }: ButtonsRowProps) => (
+export const ButtonsRow = ({ variants, ...props }) => (
   <View style={styles.buttonRow}>
     {variants?.map((b, i) => (
       <Button key={i} {...props} {...b} />
@@ -205,12 +203,3 @@ storiesOf('Buttons', module)
       />
     </View>
   ));
-
-const styles = StyleSheet.create({
-  buttonRow: {
-    flexDirection: 'row',
-    margin: 10,
-    width: '100%',
-    justifyContent: 'space-around',
-  },
-});

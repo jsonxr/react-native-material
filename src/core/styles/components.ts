@@ -1,30 +1,6 @@
 import { AvatarProps, AvatarStyles } from '../Avatar';
-
-// export interface ComponentsPropsList {
-//   MuiAvatar: Omit<AvatarProps, 'children'>;
-// }
-
-// export type ComponentsProps = {
-//   [Name in keyof ComponentsPropsList]?: Partial<any> | undefined;
-// };
-
-//{ [x: string]: { defaultProps?: Partial<any> | undefined; }; }
-
-export type ComponentsVariants = {
-  [Name in keyof ComponentsPropsList]?: Array<{
-    props: Partial<ComponentsPropsList[Name]>;
-    style: // JSS property bag
-    | CSSProperties
-      // JSS property bag where values are based on props
-      | CreateCSSProperties<Partial<ComponentsPropsList[Name]>>
-      // JSS property bag based on props
-      | PropsFunc<
-          Partial<ComponentsPropsList[Name]>,
-          CreateCSSProperties<Partial<ComponentsPropsList[Name]>>
-        >;
-  }>;
-};
-
+import { AvatarGroupProps, AvatarGroupStyles } from '../AvatarGroup';
+import { ButtonProps, ButtonStyles } from '../Button';
 export interface Components {
   // MuiAlert?: {
   //   defaultProps?: ComponentsProps['MuiAlert'];
@@ -48,10 +24,10 @@ export interface Components {
     styleOverrides?: AvatarStyles; //ComponentsOverrides['MuiAvatar'];
     //variants?: ComponentsVariants['MuiAvatar'];
   };
-  // MuiAvatarGroup?: {
-  //   defaultProps?: ComponentsProps['MuiAvatarGroup'];
-  //   styleOverrides?: ComponentsOverrides['MuiAvatarGroup'];
-  // };
+  MuiAvatarGroup?: {
+    defaultProps?: Omit<AvatarGroupProps, 'children'>;
+    styleOverrides?: AvatarGroupStyles;
+  };
   // MuiBackdrop?: {
   //   defaultProps?: ComponentsProps['MuiBackdrop'];
   //   styleOverrides?: ComponentsOverrides['MuiBackdrop'];
@@ -73,11 +49,10 @@ export interface Components {
   //   defaultProps?: ComponentsProps['MuiBreadcrumbs'];
   //   styleOverrides?: ComponentsOverrides['MuiBreadcrumbs'];
   // };
-  // MuiButton?: {
-  //   defaultProps?: ComponentsProps['MuiButton'];
-  //   styleOverrides?: ComponentsOverrides['MuiButton'];
-  //   variants?: ComponentsVariants['MuiButton'];
-  // };
+  MuiButton?: {
+    defaultProps?: Omit<ButtonProps, 'children'>;
+    styleOverrides?: ButtonStyles;
+  };
   // MuiButtonBase?: {
   //   defaultProps?: ComponentsProps['MuiButtonBase'];
   //   styleOverrides?: ComponentsOverrides['MuiButtonBase'];

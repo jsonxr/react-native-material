@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import { Text, TextStyle } from 'react-native';
 import createStyles from './Typography.styles';
-import { useTheme } from '../styles/Theme/useTheme';
+import { useTheme } from '../styles/theme/useTheme';
 import { TypographyVariant } from '../styles/typography';
-import { Palette } from '../styles/Palette';
+//import { Palette } from '../styles/Palette';
 
 export type TypographyColor =
   | 'initial'
@@ -41,14 +41,14 @@ export interface TypographyProps {
   overline?: boolean;
 }
 
-const getTextColor = (color: TypographyColor, palette: Palette): string => {
-  switch (color) {
-    case 'textPrimary':
-      return palette.text.primary;
-    case 'textSecondary':
-      return palette.text.secondary;
-  }
-};
+// const getTextColor = (color: TypographyColor, palette: Palette): string => {
+//   switch (color) {
+//     case 'textPrimary':
+//       return palette.text.primary;
+//     case 'textSecondary':
+//       return palette.text.secondary;
+//   }
+// };
 
 const getStylenameFromVariantBools = (
   styles: Record<string, any>,

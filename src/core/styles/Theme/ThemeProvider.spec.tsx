@@ -2,7 +2,6 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import createMuiTheme from '../createMuiTheme';
 import { ThemeProvider } from './ThemeProvider';
-import ThemeContext from './ThemeContext';
 import { Theme } from './Theme';
 import green from '../../colors/green';
 import red from '../../colors/red';

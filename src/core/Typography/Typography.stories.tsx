@@ -4,7 +4,11 @@ import { storiesOf } from '@storybook/react-native';
 import { ThemeDecorator } from '../../../storybook/decorators';
 
 import { Typography } from '../..';
-import { useTheme } from '../styles/Theme/useTheme';
+import { useTheme } from '../styles/theme/useTheme';
+
+const styles = StyleSheet.create({
+  view: { borderWidth: 1, borderColor: 'red', width: '100%', height: '100%' },
+});
 
 storiesOf('Typography', module)
   .addDecorator(ThemeDecorator)
@@ -65,7 +69,3 @@ storiesOf('Typography', module)
       </ScrollView>
     );
   });
-
-const styles = StyleSheet.create({
-  view: { borderWidth: 1, borderColor: 'red', width: '100%', height: '100%' },
-});

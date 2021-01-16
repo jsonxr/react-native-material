@@ -8,6 +8,13 @@ import {
 
 import { Icon, IconButton } from '../..';
 
+const styles = StyleSheet.create({
+  root: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+});
+
 storiesOf('IconButton', module)
   .addDecorator(ThemeDecorator)
   .addDecorator(DefaultDecorator)
@@ -27,10 +34,3 @@ storiesOf('IconButton', module)
       </IconButton>
     </View>
   ));
-
-const styles = StyleSheet.create({
-  root: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-});

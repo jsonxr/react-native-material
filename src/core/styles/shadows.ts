@@ -32,7 +32,7 @@ const createShadow = (elevation: ElevationType): ViewStyle => {
   return {};
 };
 
-export const shadows = [
+const shadows = [
   createShadow(0),
   createShadow(1),
   createShadow(2),
@@ -61,4 +61,5 @@ export const shadows = [
   createShadow(25),
 ];
 
+export default shadows;
 export type Shadows = typeof shadows;
