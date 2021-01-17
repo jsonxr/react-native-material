@@ -1,4 +1,4 @@
-export interface Color {
+export interface PaletteColor {
   '50': string;
   '100': string;
   '200': string;

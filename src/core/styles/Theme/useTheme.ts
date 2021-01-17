@@ -3,7 +3,7 @@ import { Theme } from './Theme';
 import ThemeContext from './ThemeContext';
 import defaultTheme from './defaultTheme';
 
-React.createContext<Theme | null>(null);
+//React.createContext<Theme | null>(null);
 
 export function useTheme<T extends Theme>(): T {
   const theme = React.useContext<Theme | null>(ThemeContext) || defaultTheme;

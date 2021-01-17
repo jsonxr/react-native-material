@@ -29,7 +29,7 @@ export const Icon = ({
   style,
 }: IconProps) => {
   const theme = useTheme();
-  const styles = createStyles(theme);
+  const styles = createStyles();
   const icon = iconFontByName(name);
 
   let textStyle: TextStyle[] = [];

@@ -11,7 +11,7 @@ const createStyles = (theme: Theme) => {
 
   // Default color of avatar
   const backgroundColor =
-    theme.palette.mode === 'light'
+    theme.palette.type === 'light'
       ? theme.palette.grey[400]
       : theme.palette.grey[600];
 

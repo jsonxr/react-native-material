@@ -19,12 +19,13 @@ const createStyles = (
 
   return StyleSheet.create({
     root: { flexDirection: 'row-reverse', ...defaultStyle?.root },
-    avatar: {
+    avatarRoot: {
       marginLeft,
       borderWidth: 2,
       borderColor: theme.palette.background.default,
       ...defaultStyle?.avatar,
     },
+    avatarText: {},
   });
 };
 

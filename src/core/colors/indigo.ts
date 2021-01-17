@@ -1,6 +1,6 @@
-import { Color } from './Color';
+import { PaletteColor } from './Color';
 
-const indigo: Color = {
+const indigo: PaletteColor = {
   50: '#e8eaf6',
   100: '#c5cae9',
   200: '#9fa8da',

@@ -1,6 +1,6 @@
-import { Color } from './Color';
+import { PaletteColor } from './Color';
 
-const lime: Color = {
+const lime: PaletteColor = {
   50: '#f9fbe7',
   100: '#f0f4c3',
   200: '#e6ee9c',

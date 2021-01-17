@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  defaultBackground: {
-    flex: 1,
-    backgroundColor: 'white',
-    width: '100%',
-    alignContent: 'center',
-    alignItems: 'center',
+  scroll: { flex: 1 },
+  contentContainer: {
+    padding: 10,
   },
 });
 
-export const DefaultDecorator = (fn: any) => (
-  <View style={styles.defaultBackground}>{fn()}</View>
+export const DefaultDecorator = (Story: any) => (
+  <ScrollView
+    style={styles.scroll}
+    contentContainerStyle={styles.contentContainer}
+  >
+    <Story />
+  </ScrollView>
 );

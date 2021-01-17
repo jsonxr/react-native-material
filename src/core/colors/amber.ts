@@ -1,6 +1,6 @@
-import { Color } from './Color';
+import { PaletteColor } from './Color';
 
-const amber: Color = {
+const amber: PaletteColor = {
   50: '#fff8e1',
   100: '#ffecb3',
   200: '#ffe082',

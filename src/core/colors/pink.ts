@@ -1,6 +1,6 @@
-import { Color } from './Color';
+import { PaletteColor } from './Color';
 
-const pink: Color = {
+const pink: PaletteColor = {
   50: '#fce4ec',
   100: '#f8bbd0',
   200: '#f48fb1',

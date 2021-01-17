@@ -1,6 +1,6 @@
-import { Color } from './Color';
+import { PaletteColor } from './Color';
 
-const teal: Color = {
+const teal: PaletteColor = {
   50: '#e0f2f1',
   100: '#b2dfdb',
   200: '#80cbc4',

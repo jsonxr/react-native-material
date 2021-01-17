@@ -1,15 +1,4 @@
-import grey from '../colors/grey';
-import {
-  Color,
-  CommonColors,
-  blue,
-  common,
-  green,
-  indigo,
-  orange,
-  pink,
-  red,
-} from '../colors';
+import { PaletteColor, CommonColors, common, grey } from '../colors';
 
 export type PaletteType = 'light' | 'dark';
 
@@ -20,20 +9,18 @@ export type PaletteTonalOffset =
       dark: number;
     };
 
-export interface PaletteColor {
+export interface SimplePaletteColor {
   light: string;
   main: string;
   dark: string;
   contrastText: string;
 }
-
-export interface SimplePaletteColorOptions {
-  light?: string;
+export interface SimplePaletteColorOptions
+  extends Partial<Omit<SimplePaletteColor, 'main'>> {
   main: string;
-  dark?: string;
-  contrastText?: string;
 }
-export type ColorPartial = Partial<Color>;
+
+export type ColorPartial = Partial<PaletteColor>;
 export type PaletteColorOptions = SimplePaletteColorOptions | ColorPartial;
 
 export function isSimplePaletteColorOptions(
@@ -91,6 +78,7 @@ export interface TypeBackground {
 }
 
 export interface PaletteOptions {
+  mode?: PaletteType;
   primary?: PaletteColorOptions;
   secondary?: PaletteColorOptions;
   error?: PaletteColorOptions;
@@ -109,82 +97,86 @@ export interface PaletteOptions {
   getContrastText?: (background: string) => string;
 }
 
-export const commonColors = {
-  common,
-  primary: {
-    light: indigo[300],
-    main: indigo[500],
-    dark: indigo[700],
-    contrastText: common.white,
-  },
-  secondary: {
-    light: pink.A200,
-    main: pink.A400,
-    dark: pink.A700,
-    contrastText: common.white,
-  },
-  error: {
-    light: red[300],
-    main: red[500],
-    dark: red[700],
-    contrastText: common.white,
-  },
-  warning: {
-    light: orange[300],
-    main: orange[500],
-    dark: orange[700],
-    contrastText: 'rgba(0, 0, 0, 0.87)',
-  },
-  info: {
-    light: blue[300],
-    main: blue[500],
-    dark: blue[700],
-    contrastText: common.white,
-  },
-  success: {
-    light: green[300],
-    main: green[500],
-    dark: green[700],
-    contrastText: 'rgba(0, 0, 0, 0.87)',
-  },
-  grey,
-  contrastThreshold: 3,
-  tonalOffset: 0.2,
-};
+// export const commonColors = {
+//   common,
+//   primary: {
+//     light: indigo[300],
+//     main: indigo[500],
+//     dark: indigo[700],
+//     contrastText: common.white,
+//   },
+//   secondary: {
+//     light: pink.A200,
+//     main: pink.A400,
+//     dark: pink.A700,
+//     contrastText: common.white,
+//   },
+//   error: {
+//     light: red[300],
+//     main: red[500],
+//     dark: red[700],
+//     contrastText: common.white,
+//   },
+//   warning: {
+//     light: orange[300],
+//     main: orange[500],
+//     dark: orange[700],
+//     contrastText: 'rgba(0, 0, 0, 0.87)',
+//   },
+//   info: {
+//     light: blue[300],
+//     main: blue[500],
+//     dark: blue[700],
+//     contrastText: common.white,
+//   },
+//   success: {
+//     light: green[300],
+//     main: green[500],
+//     dark: green[700],
+//     contrastText: 'rgba(0, 0, 0, 0.87)',
+//   },
+//   grey,
+//   contrastThreshold: 3,
+//   tonalOffset: 0.2,
+// };
 
 export type TypeDivider = string;
 
-export interface Palette {
-  mode: 'light' | 'dark';
+export interface PaletteBase {
   common: CommonColors;
   type: PaletteType;
-  contrastThreshold: number;
-  tonalOffset: PaletteTonalOffset;
-  primary: PaletteColor;
-  secondary: PaletteColor;
-  error: PaletteColor;
-  warning: PaletteColor;
-  info: PaletteColor;
-  success: PaletteColor;
-  grey: Color;
-  text: TypeText;
   divider: TypeDivider;
   action: TypeAction;
   background: TypeBackground;
+  text: TypeText;
+}
+
+export interface Palette extends PaletteBase {
+  contrastThreshold: number;
+  tonalOffset: PaletteTonalOffset;
+  primary: SimplePaletteColor;
+  secondary: SimplePaletteColor;
+  error: SimplePaletteColor;
+  warning: SimplePaletteColor;
+  info: SimplePaletteColor;
+  success: SimplePaletteColor;
+  grey: PaletteColor;
+
   getContrastText: (background: string) => string;
   augmentColor: {
     (
       color: ColorPartial,
-      mainShade?: number | string,
-      lightShade?: number | string,
-      darkShade?: number | string
-    ): PaletteColor;
-    (color: PaletteColorOptions): PaletteColor;
+      mainShade?: keyof PaletteColor,
+      lightShade?: keyof PaletteColor,
+      darkShade?: keyof PaletteColor
+    ): SimplePaletteColor;
+    (color: PaletteColorOptions): SimplePaletteColor;
   };
 }
 
-export const light = {
-  mode: 'light',
+export const light: PaletteBase = {
+  type: 'light' as PaletteType,
+  common,
   // The colors used to style the text.
   text: {
     // The most important text.
@@ -225,14 +217,15 @@ export const light = {
   },
 };
 
-export const dark = {
-  mode: 'dark',
+export const dark: PaletteBase = {
+  type: 'dark' as PaletteType,
+  common,
   text: {
     primary: common.white,
     secondary: 'rgba(255, 255, 255, 0.7)',
     disabled: 'rgba(255, 255, 255, 0.5)',
     hint: 'rgba(255, 255, 255, 0.5)',
-    icon: 'rgba(255, 255, 255, 0.5)',
+    //icon: 'rgba(255, 255, 255, 0.5)',
   },
   divider: 'rgba(255, 255, 255, 0.12)',
   background: {

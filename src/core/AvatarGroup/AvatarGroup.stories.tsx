@@ -8,15 +8,13 @@ import {
 
 import { Avatar, AvatarGroup } from '../..';
 
-const avatars = [
-  require('../../../assets/images/avatars/1.jpg'),
-  require('../../../assets/images/avatars/2.jpg'),
-  require('../../../assets/images/avatars/3.jpg'),
-  require('../../../assets/images/avatars/4.jpg'),
-  require('../../../assets/images/avatars/5.jpg'),
-  require('../../../assets/images/avatars/6.jpg'),
-  require('../../../assets/images/avatars/7.jpg'),
-];
+const a1 = require('../../../assets/images/avatars/1.jpg');
+const a2 = require('../../../assets/images/avatars/2.jpg');
+const a3 = require('../../../assets/images/avatars/3.jpg');
+const a4 = require('../../../assets/images/avatars/4.jpg');
+const a5 = require('../../../assets/images/avatars/5.jpg');
+const a6 = require('../../../assets/images/avatars/6.jpg');
+const a7 = require('../../../assets/images/avatars/7.jpg');
 
 storiesOf('AvatarGroup', module)
   .addDecorator(ThemeDecorator)
@@ -24,13 +22,13 @@ storiesOf('AvatarGroup', module)
   .add('Default', () => (
     <View>
       <AvatarGroup max={4}>
-        <Avatar source={avatars[0]} />
-        <Avatar source={avatars[1]} />
-        <Avatar source={avatars[2]} />
-        <Avatar source={avatars[3]} />
-        <Avatar source={avatars[4]} />
-        <Avatar source={avatars[5]} />
-        <Avatar source={avatars[6]} />
+        <Avatar image={a1} />
+        <Avatar image={a2} />
+        <Avatar image={a3} />
+        <Avatar image={a4} />
+        <Avatar image={a5} />
+        <Avatar image={a6} />
+        <Avatar image={a7} />
       </AvatarGroup>
     </View>
   ));

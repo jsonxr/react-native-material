@@ -1,7 +1,6 @@
 import {
-  Color,
+  PaletteColor,
   blue,
-  common,
   green,
   grey,
   indigo,
@@ -87,9 +86,9 @@ export default function createPalette({
 
   const augmentColor = (
     color: PaletteColorOptions,
-    mainShade: keyof Color = '500',
-    lightShade: keyof Color = '300',
-    darkShade: keyof Color = '700'
+    mainShade: keyof PaletteColor = '500',
+    lightShade: keyof PaletteColor = '300',
+    darkShade: keyof PaletteColor = '700'
   ) => {
     const simpleColor = isSimplePaletteColorOptions(color)
       ? (color as SimplePaletteColorOptions)
@@ -138,42 +137,37 @@ The color object needs to have a 'main' property or a '${mainShade}' property.`)
     }
   }
 
-  const paletteOutput = deepmerge(
-    {
-      // A collection of common colors.
-      common,
-      // The palette type, can be light or dark.
-      type,
-      // The colors used to represent primary interface elements for a user.
-      primary: augmentColor(primary),
-      // The colors used to represent secondary interface elements for a user.
-      secondary: augmentColor(secondary, 'A400', 'A200', 'A700'),
-      // The colors used to represent interface elements that the user should be made aware of.
-      error: augmentColor(error),
-      // The colors used to represent potentially dangerous actions or important messages.
-      warning: augmentColor(warning),
-      // The colors used to present information to the user that is neutral and not necessarily important.
-      info: augmentColor(info),
-      // The colors used to indicate the successful completion of an action that user triggered.
-      success: augmentColor(success),
-      // The grey colors.
-      grey,
-      // Used by `getContrastText()` to maximize the contrast between
-      // the background and the text.
-      contrastThreshold,
-      // Takes a background color and returns the text color that maximizes the contrast.
-      getContrastText,
-      // Generate a rich color object.
-      augmentColor,
-      // Used by the functions below to shift a color's luminance by approximately
-      // two indexes within its tonal palette.
-      // E.g., shift from Red 500 to Red 300 or Red 700.
-      tonalOffset,
-      // The light and dark type object.
-      ...types[type],
-    },
-    other
-  );
+  const defaultPalette: Palette = {
+    // The light and dark type object.
+    ...types[type],
+    // The colors used to represent primary interface elements for a user.
+    primary: augmentColor(primary),
+    // The colors used to represent secondary interface elements for a user.
+    secondary: augmentColor(secondary, 'A400', 'A200', 'A700'),
+    // The colors used to represent interface elements that the user should be made aware of.
+    error: augmentColor(error),
+    // The colors used to represent potentially dangerous actions or important messages.
+    warning: augmentColor(warning),
+    // The colors used to present information to the user that is neutral and not necessarily important.
+    info: augmentColor(info),
+    // The colors used to indicate the successful completion of an action that user triggered.
+    success: augmentColor(success),
+    // The grey colors.
+    grey,
+    // Used by `getContrastText()` to maximize the contrast between
+    // the background and the text.
+    contrastThreshold,
+    // Takes a background color and returns the text color that maximizes the contrast.
+    getContrastText,
+    // Generate a rich color object.
+    augmentColor,
+    // Used by the functions below to shift a color's luminance by approximately
+    // two indexes within its tonal palette.
+    // E.g., shift from Red 500 to Red 300 or Red 700.
+    tonalOffset,
+  };
+
+  const paletteOutput: Palette = deepmerge(defaultPalette, other);
 
   return paletteOutput;
 }

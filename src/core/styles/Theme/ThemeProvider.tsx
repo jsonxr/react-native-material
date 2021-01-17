@@ -32,7 +32,7 @@ const mergeOuterLocalTheme = (
 
 export interface ThemeProviderProps {
   children: any;
-  theme: any;
+  theme?: any;
 }
 
 /**
@@ -42,6 +42,9 @@ export interface ThemeProviderProps {
  */
 export function ThemeProvider({ children, theme }: ThemeProviderProps) {
   const outerTheme = useTheme();
+  // const [stateTheme, setStateTheme] = useState<Theme>(() => {
+  //   const MyContext = React.createContext(defaultValue);
+  // });
 
   const mergedtheme: Theme = theme
     ? mergeOuterLocalTheme(outerTheme, theme)

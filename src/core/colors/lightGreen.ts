@@ -1,6 +1,6 @@
-import { Color } from './Color';
+import { PaletteColor } from './Color';
 
-const lightGreen: Color = {
+const lightGreen: PaletteColor = {
   50: '#f1f8e9',
   100: '#dcedc8',
   200: '#c5e1a5',

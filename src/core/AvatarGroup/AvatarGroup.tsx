@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { View } from 'react-native';
 import { Avatar } from '../Avatar/Avatar';
+import { AvatarStyles } from '../Avatar/Avatar.styles';
 import { useTheme } from '../styles';
 import useThemeProps from '../styles/theme/useThemeProps';
 import createStyles from './AvatarGroup.styles';
@@ -18,6 +19,7 @@ const isFragment = (object: any) => {
 };
 
 export interface AvatarGroupProps {
+  avatarStyles?: AvatarStyles;
   max?: number;
   spacing?: 'medium' | 'small' | number;
   variant?: 'circular' | 'rounded' | 'square';
@@ -62,7 +64,7 @@ export const AvatarGroup = (inProps: AvatarGroupProps) => {
   return (
     <View style={styles.root} {...rest}>
       {extraAvatars ? (
-        <Avatar style={styles.avatar}>{`+${extraAvatars}`}</Avatar>
+        <Avatar styles={props.avatarStyles}>{`+${extraAvatars}`}</Avatar>
       ) : null}
 
       {children
@@ -70,7 +72,7 @@ export const AvatarGroup = (inProps: AvatarGroupProps) => {
         .reverse()
         .map((child: any) => {
           return React.cloneElement(child, {
-            style: styles.avatar,
+            style: props.avatarStyles,
             variant: child.props.variant || variant,
           } as any);
         })}

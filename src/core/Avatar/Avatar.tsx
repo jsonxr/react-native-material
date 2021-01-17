@@ -17,12 +17,14 @@ import useThemeProps from '../styles/theme/useThemeProps';
 export type AvatarSize = number | 'small' | 'medium' | 'large';
 
 export interface AvatarProps {
-  size?: AvatarSize;
-  color?: string;
-  textColor?: string;
-  styles?: AvatarStyles;
-  source?: ImageSourcePropType;
   children?: ReactNode;
+  color?: string;
+  icon?: string;
+  image?: ImageSourcePropType;
+  size?: AvatarSize;
+  //style: ViewStyle;
+  styles?: AvatarStyles;
+  text?: string;
   variant?: 'rounded' | 'square' | 'circular';
 }
 
@@ -66,6 +68,11 @@ const rootStyle = (
       styles.push({ borderRadius: width / 2 });
   }
 
+  // color
+  if (props?.color) {
+    styles.push({ backgroundColor: props?.color });
+  }
+
   // styles
   if (props?.styles?.root) {
     styles.push(props.styles?.root);
@@ -88,7 +95,8 @@ const textStyle = (
 
   // color
   if (props?.color) {
-    styles.push({ color: props?.color });
+    const contrastColor = theme.palette.getContrastText(props.color);
+    styles.push({ color: contrastColor }); // 'black' });
   }
 
   // styles
@@ -120,7 +128,7 @@ const imageStyle = (
 };
 
 export const Avatar = (props: AvatarProps = {}) => {
-  const { children, size = 'medium', source, ...rest } = useThemeProps({
+  const { children, size = 'medium', image, ...rest } = useThemeProps({
     props,
     name: 'MuiAvatar',
   });
@@ -133,31 +141,29 @@ export const Avatar = (props: AvatarProps = {}) => {
   };
   const width = calculateSize(theme, size);
 
+  const text = props.text || (typeof children === 'string' ? children : null);
+
   return (
     <View {...rest} style={styles.root}>
-      {typeof children === 'string' ? (
-        <>
-          <Text style={styles.text}>{`${children}`}</Text>
-        </>
-      ) : (
-        // Icons
-        React.Children.map(children as any, (child) => {
-          return React.cloneElement<ReactNode>(child, {
-            style: {
-              color: styles.text.color,
-              ...child.props?.style,
-            },
-          } as any);
-        })
-      )}
-      {source && (
+      {text && <Text style={styles.text}>{`${text}`}</Text>}
+      {image && (
         <Image
           style={styles.image}
           width={width}
           height={width}
-          source={source}
+          source={image}
         />
       )}
+      {typeof children !== 'string' &&
+        // Icons
+        React.Children.map(children as any, (child) => {
+          return React.cloneElement<ReactNode>(child, {
+            style: {
+              color: child.props?.color ? styles.text.color : undefined,
+              ...child.props?.style,
+            },
+          } as any);
+        })}
     </View>
   );
 };
