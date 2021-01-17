@@ -1,31 +1,38 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import {
+  FlexStyle,
   Image,
   ImageSourcePropType,
   ImageStyle,
+  ShadowStyleIOS,
   StyleSheet,
   Text,
   TextStyle,
   View,
   ViewStyle,
 } from 'react-native';
-import createStyles, { AvatarStyles } from './Avatar.styles';
+import createStyles from './Avatar.styles';
 import { useTheme } from '../styles/theme/useTheme';
 import { Theme } from '../styles/theme/Theme';
 import useThemeProps from '../styles/theme/useThemeProps';
+import { IconName } from '../Icon/IconName';
+import { Icon } from '../Icon/Icon';
 
 export type AvatarSize = number | 'small' | 'medium' | 'large';
+export type AvatarVariant = 'rounded' | 'square' | 'circular';
 
 export interface AvatarProps {
   children?: ReactNode;
   color?: string;
-  icon?: string;
+  icon?: IconName;
   image?: ImageSourcePropType;
   size?: AvatarSize;
   //style: ViewStyle;
-  styles?: AvatarStyles;
+  style?: ViewStyle & FlexStyle & ShadowStyleIOS;
+  textStyle?: TextStyle;
+  imageStyle?: ImageStyle;
   text?: string;
-  variant?: 'rounded' | 'square' | 'circular';
+  variant?: AvatarVariant;
 }
 
 const calculateSize = (theme: Theme, size: AvatarSize | undefined): number => {
@@ -34,13 +41,11 @@ const calculateSize = (theme: Theme, size: AvatarSize | undefined): number => {
   }
   switch (size) {
     case 'small':
-      return theme.spacing(3);
-    case 'medium':
       return theme.spacing(5);
     case 'large':
-      return theme.spacing(7);
+      return theme.spacing(9);
     default:
-      return theme.spacing(5);
+      return theme.spacing(7);
   }
 };
 
@@ -74,8 +79,8 @@ const rootStyle = (
   }
 
   // styles
-  if (props?.styles?.root) {
-    styles.push(props.styles?.root);
+  if (props?.style) {
+    styles.push(props.style);
   }
 
   return StyleSheet.flatten(styles);
@@ -100,8 +105,8 @@ const textStyle = (
   }
 
   // styles
-  if (props?.styles?.text) {
-    styles.push(props.styles?.text);
+  if (props?.textStyle) {
+    styles.push(props.textStyle);
   }
 
   return StyleSheet.flatten(styles);
@@ -120,32 +125,61 @@ const imageStyle = (
   styles.push({ width: width, height: width });
 
   // styles
-  if (props?.styles?.image) {
-    styles.push(props.styles.image);
+  if (props?.imageStyle) {
+    styles.push(props.imageStyle);
   }
 
   return StyleSheet.flatten(styles);
 };
 
 export const Avatar = (props: AvatarProps = {}) => {
-  const { children, size = 'medium', image, ...rest } = useThemeProps({
+  const {
+    children,
+    color,
+    size = 'medium',
+    image,
+    icon,
+    ...rest
+  } = useThemeProps({
     props,
     name: 'MuiAvatar',
   });
   const theme = useTheme();
-  const defaultStyles = createStyles(theme);
-  const styles = {
-    root: rootStyle(theme, defaultStyles.root, props),
-    text: textStyle(theme, defaultStyles.text, props),
-    image: imageStyle(theme, defaultStyles.image, props),
-  };
-  const width = calculateSize(theme, size);
+  // Calculate the styles
+  const { styles, contrastColor, width, text } = useMemo(() => {
+    const defaultStyles = createStyles(theme);
+    const cStyles = {
+      root: rootStyle(theme, defaultStyles.root, props),
+      text: textStyle(theme, defaultStyles.text, props),
+      image: imageStyle(theme, defaultStyles.image, props),
+    };
 
-  const text = props.text || (typeof children === 'string' ? children : null);
+    const backgroundColor =
+      theme.palette.type === 'light'
+        ? theme.palette.grey[400]
+        : theme.palette.grey[600];
+    const cContrastColor = color
+      ? theme.palette.getContrastText(color)
+      : theme.palette.getContrastText(backgroundColor);
+
+    const cWidth = calculateSize(theme, size);
+    const cText =
+      props.text ||
+      (children && typeof children === 'string' ? children : null);
+
+    return {
+      styles: cStyles,
+      contrastColor: cContrastColor,
+      width: cWidth,
+      text: cText,
+    };
+  }, [theme, props, children, color, size]);
 
   return (
     <View {...rest} style={styles.root}>
       {text && <Text style={styles.text}>{`${text}`}</Text>}
+      {icon && <Icon color={contrastColor} name={icon} />}
+      {typeof children !== 'string' && children}
       {image && (
         <Image
           style={styles.image}
@@ -154,16 +188,6 @@ export const Avatar = (props: AvatarProps = {}) => {
           source={image}
         />
       )}
-      {typeof children !== 'string' &&
-        // Icons
-        React.Children.map(children as any, (child) => {
-          return React.cloneElement<ReactNode>(child, {
-            style: {
-              color: child.props?.color ? styles.text.color : undefined,
-              ...child.props?.style,
-            },
-          } as any);
-        })}
     </View>
   );
 };

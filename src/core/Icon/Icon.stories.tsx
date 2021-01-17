@@ -38,7 +38,12 @@ storiesOf('Icon', module)
             <Icon key={size} name="android" size={size} />
           ))}
           {colors.map((color) => (
-            <Icon key={color} name="android" size="large" color={color} />
+            <Icon
+              key={color as string}
+              name="android"
+              size="large"
+              color={color}
+            />
           ))}
         </View>
         <View style={styles.iconRow}>

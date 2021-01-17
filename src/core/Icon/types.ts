@@ -1,9 +1,6 @@
+import { CssColor } from '../colors';
+import { PaletteColor } from '../styles/Palette';
+
 export type IconSize = 'small' | 'medium' | 'large';
-export type IconColor =
-  | string
-  | 'primary'
-  | 'secondary'
-  | 'action'
-  | 'error'
-  | 'disabled';
+export type IconColor = string | CssColor | PaletteColor;
 export * from './IconName';

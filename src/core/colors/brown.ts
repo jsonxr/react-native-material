@@ -1,6 +1,6 @@
-import { PaletteColor } from './Color';
+import { PaletteColorShades } from './Color';
 
-const brown: PaletteColor = {
+const brown: PaletteColorShades = {
   50: '#efebe9',
   100: '#d7ccc8',
   200: '#bcaaa4',

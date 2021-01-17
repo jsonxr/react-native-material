@@ -36,7 +36,7 @@ export const Icon = ({
   textStyle.push(styles.root);
 
   if (color) {
-    let styleColor;
+    let styleColor: IconColor;
     switch (color) {
       case 'primary':
         styleColor = theme.palette.primary.main;

@@ -7,7 +7,7 @@ import {
   DefaultDecorator,
 } from '../../../storybook/decorators';
 
-import { Button } from '../..';
+import { Button, ButtonColor, ButtonSize, ButtonVariant } from '../..';
 
 const styles = StyleSheet.create({
   buttonRow: {
@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
 });
 
 export const ButtonsGrid = ({ ...props }) => {
-  const sizes = ['small', 'medium', 'large'];
-  const variants = ['text', 'contained', 'outlined'];
-  const colors = ['primary', 'secondary', 'default'];
+  const sizes: ButtonSize[] = ['small', 'medium', 'large'];
+  const variants: ButtonVariant[] = ['text', 'contained', 'outlined'];
+  const colors: ButtonColor[] = ['primary', 'secondary', 'default'];
 
   return (
     <View>
@@ -48,7 +48,12 @@ export const ButtonsGrid = ({ ...props }) => {
   );
 };
 
-export const ButtonsRow = ({ variants, ...props }) => (
+export const ButtonsRow = ({
+  variants,
+  ...props
+}: {
+  variants: ButtonVariant[];
+}) => (
   <View style={styles.buttonRow}>
     {variants?.map((b, i) => (
       <Button key={i} {...props} {...b} />

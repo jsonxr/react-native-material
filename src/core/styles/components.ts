@@ -1,6 +1,8 @@
 import { AvatarProps, AvatarStyles } from '../Avatar';
 import { AvatarGroupProps, AvatarGroupStyles } from '../AvatarGroup';
 import { ButtonProps, ButtonStyles } from '../Button';
+import { TypographyProps, TypographyStyles } from '../Typography';
+
 export interface Components {
   // MuiAlert?: {
   //   defaultProps?: ComponentsProps['MuiAlert'];
@@ -21,7 +23,7 @@ export interface Components {
   // };
   MuiAvatar?: {
     defaultProps?: Omit<AvatarProps, 'children'>; // ComponentsProps['MuiAvatar'];
-    styleOverrides?: AvatarStyles; //ComponentsOverrides['MuiAvatar'];
+    styleOverrides?: Partial<AvatarStyles>; //ComponentsOverrides['MuiAvatar'];
     //variants?: ComponentsVariants['MuiAvatar'];
   };
   MuiAvatarGroup?: {
@@ -443,11 +445,10 @@ export interface Components {
   //   defaultProps?: ComponentsProps['MuiTouchRipple'];
   //   styleOverrides?: ComponentsOverrides['MuiTouchRipple'];
   // };
-  // MuiTypography?: {
-  //   defaultProps?: ComponentsProps['MuiTypography'];
-  //   styleOverrides?: ComponentsOverrides['MuiTypography'];
-  //   variants?: ComponentsVariants['MuiTypography'];
-  // };
+  MuiTypography?: {
+    defaultProps?: TypographyProps; // ComponentsProps['MuiTypography'];
+    styleOverrides?: Partial<TypographyStyles>; // ComponentsOverrides['MuiTypography'];
+  };
   // MuiUseMediaQuery?: {
   //   defaultProps?: ComponentsProps['MuiUseMediaQuery'];
   // };

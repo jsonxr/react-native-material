@@ -1,8 +1,12 @@
-import React, { ReactNode } from 'react';
-import { Text, TextStyle } from 'react-native';
+import React, { ReactNode, useMemo } from 'react';
+import { StyleSheet, Text, TextStyle } from 'react-native';
 import createStyles from './Typography.styles';
 import { useTheme } from '../styles/theme/useTheme';
 import { TypographyVariant } from '../styles/typography';
+import useThemeProps from '../styles/theme/useThemeProps';
+import { capitalize } from '../../utils/capitalize';
+import { Theme } from '../styles/theme/Theme';
+import { decomposeColor } from '../styles/colorManipulator';
 //import { Palette } from '../styles/Palette';
 
 export type TypographyColor =
@@ -41,15 +45,6 @@ export interface TypographyProps {
   overline?: boolean;
 }
 
-// const getTextColor = (color: TypographyColor, palette: Palette): string => {
-//   switch (color) {
-//     case 'textPrimary':
-//       return palette.text.primary;
-//     case 'textSecondary':
-//       return palette.text.secondary;
-//   }
-// };
-
 const getStylenameFromVariantBools = (
   styles: Record<string, any>,
   variants: any
@@ -77,56 +72,53 @@ const getStylenameFromVariantBools = (
   return filteredStyles[0] as TypographyVariant;
 };
 
-/**
- * Looks at variant
- */
-export const Typography = ({
-  text,
-  gutterBottom,
-  paragraph,
-  children,
-  style,
-  color,
-  variant,
-  noWrap,
-  ...variants
-}: TypographyProps) => {
-  const theme = useTheme();
+const calculate = (theme: Theme, props: TypographyProps) => {
   const styles = createStyles(theme);
-  const computedStyles: any = [];
+  const computedStyles: TextStyle[] = [styles.root];
+
+  const {
+    gutterBottom,
+    paragraph,
+    style,
+    color,
+    variant,
+    noWrap,
+    ...variants
+  } = props;
+
+  // variant
+  const styleName =
+    variant ?? getStylenameFromVariantBools(styles, variants) ?? 'body1';
+  const textStyle = (styles as any)[styleName];
+  textStyle && computedStyles.push(textStyle);
 
   // Variant
-  let styleName = variant;
-  if (!styleName) {
-    styleName = getStylenameFromVariantBools(styles, variants);
-  }
-  if (!styleName) {
-    styleName = 'body1';
-  }
-  computedStyles.push((styles as any)[styleName]);
 
   // color
   if (color) {
-    const colorStyle = (styles as any)[`${color}Color`];
-    computedStyles.push(colorStyle);
+    const colorStyle = (styles as any)[`color${capitalize(color)}`];
+    if (colorStyle) {
+      computedStyles.push(colorStyle);
+    }
   }
 
-  if (gutterBottom) {
-    computedStyles.push(styles.textGutterBotton);
-  }
+  gutterBottom && computedStyles.push(styles.gutterBottom);
+  paragraph && computedStyles.push(styles.paragraph);
+  noWrap && computedStyles.push(styles.noWrap);
+  style && computedStyles.push(style);
 
-  if (paragraph) {
-    computedStyles.push(styles.paragraph);
-  }
+  return StyleSheet.flatten(computedStyles);
+};
 
-  if (noWrap) {
-    computedStyles.push(styles.noWrap);
-  }
+/**
+ * Looks at variant
+ */
+export const Typography = (props: TypographyProps) => {
+  const { text, children } = useThemeProps({ props, name: 'MuiTypography' });
+  const theme = useTheme();
+  const style = useMemo(() => {
+    return calculate(theme, props);
+  }, [theme, props]);
 
-  // style
-  if (style) {
-    computedStyles.push(style);
-  }
-
-  return <Text style={computedStyles}>{text ?? children}</Text>;
+  return <Text style={style}>{text ?? children}</Text>;
 };

@@ -4,6 +4,8 @@ import { ButtonBase } from '../ButtonBase/ButtonBase';
 import createStyles from './Button.styles';
 import { useTheme, Theme } from '../styles/theme';
 import useThemeProps from '../styles/theme/useThemeProps';
+import { capitalize } from '../../utils/capitalize';
+import { TypographyVariant } from '../styles/typography/types';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonColor = 'primary' | 'secondary' | 'default';
@@ -37,93 +39,100 @@ export interface ButtonProps {
   onPress?: () => void;
 }
 
-const rootStyle = (
-  theme: Theme,
-  defaultStyle: ViewStyle,
-  props: ButtonProps
-): ViewStyle => {
-  const styles: ViewStyle[] = [];
-  // default
-  if (defaultStyle) {
-    styles.push(defaultStyle);
-  }
+// const rootStyle = (
+//   theme: Theme,
+//   defaultStyle: ViewStyle,
+//   props: ButtonProps
+// ): ViewStyle => {
+//   const styles: ViewStyle[] = [];
+//   // default
+//   if (defaultStyle) {
+//     styles.push(defaultStyle);
+//   }
 
-  //style
-  if (props.style) {
-    styles.push(props.style);
-  }
-  return StyleSheet.flatten(styles);
-};
+//   //style
+//   if (props.style) {
+//     styles.push(props.style);
+//   }
+//   return StyleSheet.flatten(styles);
+// };
 
-const textStyle = (
-  theme: Theme,
-  defaultStyle: TextStyle,
-  props: ButtonProps
-): ViewStyle => {
-  // default
-  const styles: TextStyle[] = [];
-  if (defaultStyle) {
-    styles.push(defaultStyle);
-  }
+// const textStyle = (
+//   theme: Theme,
+//   defaultStyle: TextStyle,
+//   props: ButtonProps
+// ): ViewStyle => {
+//   // default
+//   const styles: TextStyle[] = [];
+//   if (defaultStyle) {
+//     styles.push(defaultStyle);
+//   }
 
-  // textStyle
-  if (props.textStyle) {
-    styles.push(props.textStyle);
-  }
+//   // textStyle
+//   if (props.textStyle) {
+//     styles.push(props.textStyle);
+//   }
 
-  return StyleSheet.flatten(styles);
-};
+//   return StyleSheet.flatten(styles);
+// };
 
 export const Button = (props: ButtonProps) => {
   const theme = useTheme();
-  const defaultStyles = createStyles(theme);
-  const styles = {
-    root: rootStyle(theme, defaultStyles.root, props),
-    text: textStyle(theme, defaultStyles.text, props),
-  };
-
   const {
+    variant,
+    color = 'primary',
+    style,
     title,
     children,
     startIcon,
     endIcon,
+    size = 'medium',
     onPress,
     ...rest
   } = useThemeProps({ props, name: 'MuiButton' });
 
-  // //const styles = createStyles(theme);
+  const styles = createStyles(theme);
 
-  // // Calculate Color style
-  // const viewStyle = (styles as any)[`${variant}${capitalize(color)}View`];
-  // const rootStyle: any = [viewStyle];
-  // if (style) {
-  //   rootStyle.push(style);
-  // }
+  // Calculate Color style
+  const viewStyle = (styles as any)[
+    `${variant}${color ? capitalize(color) : ''}View`
+  ];
+  const rootStyles: any = [viewStyle];
+  if (style) {
+    rootStyles.push(style);
+  }
+  const rootStyle = StyleSheet.flatten(rootStyles);
 
-  // // Calculate Text styles
-  // const colorStyle = (styles as any)[`${variant}${capitalize(color)}Color`];
-  // const textStyles: any = [styles[size]];
-  // textStyles.push(colorStyle);
+  // Calculate Text styles
+  const colorStyle = (styles as any)[
+    `${variant}${color ? capitalize(color) : ''}Color`
+  ];
+  const textStyles: any = [styles[size]];
+  textStyles.push(colorStyle);
 
-  // //`view-${variant}-${color}`;
-  // let typeVariant: TypographyVariant;
-  // switch (size) {
-  //   case 'small':
-  //     typeVariant = 'buttonSmall';
-  //     break;
-  //   case 'medium':
-  //     typeVariant = 'button';
-  //     break;
-  //   case 'large':
-  //     typeVariant = 'buttonLarge';
-  //     break;
-  // }
+  //`view-${variant}-${color}`;
+  let typeVariant: TypographyVariant;
+  switch (size) {
+    case 'small':
+      typeVariant = 'buttonSmall';
+      break;
+    case 'medium':
+      typeVariant = 'button';
+      break;
+    case 'large':
+      typeVariant = 'buttonLarge';
+      break;
+  }
+
+  const textStyle = StyleSheet.flatten(textStyles);
+  const text =
+    props.title || (children && typeof children === 'string' ? children : null);
 
   return (
-    <ButtonBase style={styles.root} {...rest} onPress={onPress}>
+    <ButtonBase style={rootStyle} {...rest} onPress={onPress}>
       {startIcon && <Text>Start</Text>}
-      {title !== undefined && <Text style={styles.text}>{title}</Text>}
-      {children !== undefined && <Text style={styles.text}>{children}</Text>}
+      {text !== undefined && <Text style={textStyle}>{text}</Text>}
+      {typeof children !== 'string' && children}
       {endIcon && <Text>End</Text>}
     </ButtonBase>
   );

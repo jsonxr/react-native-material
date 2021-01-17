@@ -25,3 +25,4 @@ export { default as deepOrange } from './deepOrange';
 export { default as brown } from './brown';
 export { default as grey } from './grey';
 export { default as blueGrey } from './blueGrey';
+export * from './cssColors';

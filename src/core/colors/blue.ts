@@ -1,6 +1,6 @@
-import { PaletteColor } from './Color';
+import { PaletteColorShades } from './Color';
 
-const blue: PaletteColor = {
+const blue: PaletteColorShades = {
   50: '#e3f2fd',
   100: '#bbdefb',
   200: '#90caf9',

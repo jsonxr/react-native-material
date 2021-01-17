@@ -57,11 +57,11 @@ const SimpleCard = (props: CardProps) => (
       <Typography variant="body2">well meaning and kindly.</Typography>
       <Typography variant="body2">"a benevolent smile"</Typography>
     </CardContent>
-    <CardActions>
+    {/* <CardActions>
       <Button size="small" onPress={action('onPress')}>
         Learn More
       </Button>
-    </CardActions>
+    </CardActions> */}
   </Card>
 );
 
@@ -140,6 +140,9 @@ storiesOf('Card', module)
       <Card raised style={styles.card}>
         <Text>Raised</Text>
       </Card>
+      <Card variant="outlined" style={styles.card}>
+        <Text>Outlined</Text>
+      </Card>
     </View>
   ))
   .add('Simple Card', () => {
@@ -150,11 +153,11 @@ storiesOf('Card', module)
         <SimpleCard variant="elevation" raised />
       </View>
     );
-  })
-  .add('Complex Interaction', () => {
-    return (
-      <View>
-        <ComplexCard />
-      </View>
-    );
   });
+// .add('Complex Interaction', () => {
+//   return (
+//     <View>
+//       <ComplexCard />
+//     </View>
+//   );
+// });

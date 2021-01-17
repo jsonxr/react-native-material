@@ -58,18 +58,9 @@ const App = () => (
 <Avatar color="rgba(0, 0, 0, 0.87)" text="a" />
 ```
 
-## styles
+## style, textStyle
 ```javascript
-const styles = {
-  root: {
-    backgroundColor: 'red',
-  },
-  text: {
-    color: 'white',
-  },
-}
-
-const App = () => <Avatar styles={styles} text="s" />
+<Avatar style={{backgroundColor: 'red'}} textStyle={{color: 'white'}} text="s" />
 ```
 
 ## theme

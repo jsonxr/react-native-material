@@ -1,5 +1,5 @@
 import {
-  PaletteColor,
+  PaletteColorShades,
   blue,
   green,
   grey,
@@ -86,9 +86,9 @@ export default function createPalette({
 
   const augmentColor = (
     color: PaletteColorOptions,
-    mainShade: keyof PaletteColor = '500',
-    lightShade: keyof PaletteColor = '300',
-    darkShade: keyof PaletteColor = '700'
+    mainShade: keyof PaletteColorShades = '500',
+    lightShade: keyof PaletteColorShades = '300',
+    darkShade: keyof PaletteColorShades = '700'
   ) => {
     const simpleColor = isSimplePaletteColorOptions(color)
       ? (color as SimplePaletteColorOptions)

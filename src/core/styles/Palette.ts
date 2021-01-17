@@ -1,4 +1,4 @@
-import { PaletteColor, CommonColors, common, grey } from '../colors';
+import { PaletteColorShades, CommonColors, common, grey } from '../colors';
 
 export type PaletteType = 'light' | 'dark';
 
@@ -20,7 +20,7 @@ export interface SimplePaletteColorOptions
   main: string;
 }
 
-export type ColorPartial = Partial<PaletteColor>;
+export type ColorPartial = Partial<PaletteColorShades>;
 export type PaletteColorOptions = SimplePaletteColorOptions | ColorPartial;
 
 export function isSimplePaletteColorOptions(
@@ -160,19 +160,27 @@ export interface Palette extends PaletteBase {
   warning: SimplePaletteColor;
   info: SimplePaletteColor;
   success: SimplePaletteColor;
-  grey: PaletteColor;
+  grey: PaletteColorShades;
 
   getContrastText: (background: string) => string;
   augmentColor: {
     (
       color: ColorPartial,
-      mainShade?: keyof PaletteColor,
-      lightShade?: keyof PaletteColor,
-      darkShade?: keyof PaletteColor
+      mainShade?: keyof PaletteColorShades,
+      lightShade?: keyof PaletteColorShades,
+      darkShade?: keyof PaletteColorShades
     ): SimplePaletteColor;
     (color: PaletteColorOptions): SimplePaletteColor;
   };
 }
+
+export type PaletteColor =
+  | 'primary'
+  | 'secondary'
+  | 'error'
+  | 'warning'
+  | 'info'
+  | 'success';
 
 export const light: PaletteBase = {
   type: 'light' as PaletteType,

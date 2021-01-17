@@ -5,6 +5,8 @@ export interface ColorObject {
   values: RGBA;
 }
 
+import { CssColor, cssToRgb } from '../colors/cssColors';
+
 /**
  * Returns a number whose value is limited to the given range.
  *
@@ -62,7 +64,7 @@ function intToHex(int: number) {
  *
  * Note: Does not support rgb % values.
  *
- * @param {string} cssColor - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla()
+ * @param {string} cssColor - CSS color, i.e. named color or one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla()
  * @returns {object} - A MUI color object: {type: string, values: number[]}
  */
 export function decomposeColor(cssColor: string | ColorObject): ColorObject {
@@ -78,6 +80,13 @@ export function decomposeColor(cssColor: string | ColorObject): ColorObject {
 
   const marker = cssColorArg.indexOf('(');
   const type = cssColorArg.substring(0, marker);
+
+  if (!type && typeof cssColorArg === 'string') {
+    const rgba = cssToRgb(cssColorArg);
+    if (rgba) {
+      return decomposeColor(rgba);
+    }
+  }
 
   if (['rgb', 'rgba', 'hsl', 'hsla'].indexOf(type) === -1) {
     throw new Error(

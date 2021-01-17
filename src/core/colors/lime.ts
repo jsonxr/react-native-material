@@ -1,6 +1,6 @@
-import { PaletteColor } from './Color';
+import { PaletteColorShades } from './Color';
 
-const lime: PaletteColor = {
+const lime: PaletteColorShades = {
   50: '#f9fbe7',
   100: '#f0f4c3',
   200: '#e6ee9c',

@@ -1,6 +1,6 @@
-import { PaletteColor } from './Color';
+import { PaletteColorShades } from './Color';
 
-const blueGrey: PaletteColor = {
+const blueGrey: PaletteColorShades = {
   50: '#eceff1',
   100: '#cfd8dc',
   200: '#b0bec5',

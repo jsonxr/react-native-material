@@ -21,7 +21,25 @@ storiesOf('AvatarGroup', module)
   .addDecorator(DefaultDecorator)
   .add('Default', () => (
     <View>
-      <AvatarGroup max={4}>
+      <AvatarGroup max={4} size="small" spacing="small">
+        <Avatar image={a1} />
+        <Avatar image={a2} />
+        <Avatar image={a3} />
+        <Avatar image={a4} />
+        <Avatar image={a5} />
+        <Avatar image={a6} />
+        <Avatar image={a7} />
+      </AvatarGroup>
+      <AvatarGroup max={4} size="medium">
+        <Avatar image={a1} />
+        <Avatar image={a2} />
+        <Avatar image={a3} />
+        <Avatar image={a4} />
+        <Avatar image={a5} />
+        <Avatar image={a6} />
+        <Avatar image={a7} />
+      </AvatarGroup>
+      <AvatarGroup max={4} size="large">
         <Avatar image={a1} />
         <Avatar image={a2} />
         <Avatar image={a3} />

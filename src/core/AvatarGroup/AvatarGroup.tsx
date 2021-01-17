@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import { View } from 'react-native';
-import { Avatar } from '../Avatar/Avatar';
+import { Avatar, AvatarSize, AvatarVariant } from '../Avatar/Avatar';
 import { AvatarStyles } from '../Avatar/Avatar.styles';
-import { useTheme } from '../styles';
+import { Theme, useTheme } from '../styles';
 import useThemeProps from '../styles/theme/useThemeProps';
 import createStyles from './AvatarGroup.styles';
 
@@ -18,17 +18,33 @@ const isFragment = (object: any) => {
   );
 };
 
+export type AvatarGroupSpacing = 'medium' | 'small' | 'large' | number;
+
 export interface AvatarGroupProps {
   avatarStyles?: AvatarStyles;
   max?: number;
-  spacing?: 'medium' | 'small' | number;
-  variant?: 'circular' | 'rounded' | 'square';
+  size?: AvatarSize;
+  spacing?: AvatarGroupSpacing;
+  variant?: AvatarVariant;
   children: ReactNode;
 }
+
+const getSpacing = (theme: Theme, spacing: AvatarGroupSpacing) => {
+  if (spacing === 'medium') {
+    return -theme.spacing(2);
+  }
+  if (typeof spacing === 'number') {
+    return -spacing;
+  }
+
+  return -theme.spacing(1);
+};
+
 export const AvatarGroup = (inProps: AvatarGroupProps) => {
   const props = useThemeProps({ props: inProps, name: 'MuiAvatar' });
   const {
     max = 5,
+    size = 'medium',
     spacing = 'medium',
     variant = 'circular',
     children: childrenProp,
@@ -36,11 +52,7 @@ export const AvatarGroup = (inProps: AvatarGroupProps) => {
   } = props;
   const theme = useTheme();
 
-  const styles = createStyles(
-    theme.components?.MuiAvatarGroup?.styleOverrides,
-    theme,
-    spacing
-  );
+  const styles = createStyles(theme);
   const clampedMax = max < 2 ? 2 : max;
 
   const children = React.Children.toArray(childrenProp).filter((child) => {
@@ -61,10 +73,16 @@ export const AvatarGroup = (inProps: AvatarGroupProps) => {
   const extraAvatars =
     children.length > clampedMax ? children.length - clampedMax + 1 : 0;
 
+  const marginLeft = getSpacing(theme, spacing);
+
   return (
     <View style={styles.root} {...rest}>
       {extraAvatars ? (
-        <Avatar styles={props.avatarStyles}>{`+${extraAvatars}`}</Avatar>
+        <Avatar
+          size={size}
+          style={{ marginLeft, ...props.avatarStyles?.root }}
+          textStyle={props.avatarStyles?.text}
+        >{`+${extraAvatars}`}</Avatar>
       ) : null}
 
       {children
@@ -72,7 +90,8 @@ export const AvatarGroup = (inProps: AvatarGroupProps) => {
         .reverse()
         .map((child: any) => {
           return React.cloneElement(child, {
-            style: props.avatarStyles,
+            size,
+            style: { marginLeft, ...props.avatarStyles?.root },
             variant: child.props.variant || variant,
           } as any);
         })}

@@ -1,6 +1,6 @@
-import { PaletteColor } from './Color';
+import { PaletteColorShades } from './Color';
 
-const deepOrange: PaletteColor = {
+const deepOrange: PaletteColorShades = {
   50: '#fbe9e7',
   100: '#ffccbc',
   200: '#ffab91',

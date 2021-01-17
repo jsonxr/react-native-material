@@ -3,6 +3,7 @@ import { FontWeight, FontVariantFunction } from './fonts/Font';
 import { Palette } from '../Palette';
 
 export type TypographyVariant =
+  | string
   | 'h1'
   | 'h2'
   | 'h3'
