@@ -14,6 +14,13 @@ import {
 } from './types';
 import roboto from './fonts/roboto';
 
+//TODO: Properly handle fonts.
+// Understand em vs pt better
+// Points - 1/72 of an inch based on the physical size of the screen, assuming a 72dpi density screen
+// PixelRatio.get()
+// https://stackoverflow.com/questions/56451288/get-screen-dpi-in-react-native
+// https://developer.android.com/guide/topics/resources/more-resources#Dimension
+
 /**
  * @see @link{https://material.io/design/typography/the-type-system.html}
  * @see @link{https://material.io/design/typography/understanding-typography.html}
