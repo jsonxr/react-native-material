@@ -1,11 +1,16 @@
-import { ViewStyle, Platform } from 'react-native';
+import { ViewStyle, Platform, ShadowStyleIOS } from 'react-native';
 import { ElevationType } from '../Paper/Paper';
 
-const createShadowAndroid = (elevation: ElevationType): ViewStyle => ({
+export type ShadowAndroid = { elevation: number | undefined };
+const createShadowAndroid = (elevation: ElevationType): ShadowAndroid => ({
   elevation,
 });
 
-const createShadowIos = (elevation: ElevationType): ViewStyle => {
+//export type ShadowStyleIOS
+
+const createShadowIos = (
+  elevation: ElevationType
+): ShadowStyleIOS & { zIndex: number } => {
   if (elevation === 0) {
     return { shadowColor: 'transparent', zIndex: 0 };
   }
@@ -18,7 +23,7 @@ const createShadowIos = (elevation: ElevationType): ViewStyle => {
     },
     shadowOpacity: 0.24,
     shadowRadius: elevation / 2,
-    zIndex: 1,
+    zIndex: 1, // TODO: Is this a bug? why do we have a zIndex of 1 because it overrides
   };
 };
 
@@ -32,6 +37,7 @@ const createShadow = (elevation: ElevationType): ViewStyle => {
   return {};
 };
 
+// TODO: Make shadows themable
 const shadows = [
   createShadow(0),
   createShadow(1),

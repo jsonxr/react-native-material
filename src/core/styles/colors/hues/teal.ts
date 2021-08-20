@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const teal: PaletteColorShades = {
+export const teal: ColorHue = {
   50: '#e0f2f1',
   100: '#b2dfdb',
   200: '#80cbc4',
@@ -16,5 +16,3 @@ const teal: PaletteColorShades = {
   A400: '#1de9b6',
   A700: '#00bfa5',
 };
-
-export default teal;

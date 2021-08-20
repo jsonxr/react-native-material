@@ -13,7 +13,7 @@ export interface AvatarStyles {
   image: ImageStyle;
   text: TextStyle;
 }
-const createStyles = (theme: Theme) => {
+const createStyles = (theme: Theme, props: AvatarProps) => {
   const overrides = theme.components?.MuiAvatar?.styleOverrides;
   // Default color of avatar
   const backgroundColor =

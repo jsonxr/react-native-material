@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const deepOrange: PaletteColorShades = {
+export const deepOrange: ColorHue = {
   50: '#fbe9e7',
   100: '#ffccbc',
   200: '#ffab91',
@@ -16,5 +16,3 @@ const deepOrange: PaletteColorShades = {
   A400: '#ff3d00',
   A700: '#dd2c00',
 };
-
-export default deepOrange;

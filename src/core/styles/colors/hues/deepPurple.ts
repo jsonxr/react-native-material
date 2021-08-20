@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const deepPurple: PaletteColorShades = {
+export const deepPurple: ColorHue = {
   50: '#ede7f6',
   100: '#d1c4e9',
   200: '#b39ddb',
@@ -16,5 +16,3 @@ const deepPurple: PaletteColorShades = {
   A400: '#651fff',
   A700: '#6200ea',
 };
-
-export default deepPurple;

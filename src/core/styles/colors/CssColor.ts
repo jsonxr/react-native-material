@@ -1,5 +1,5 @@
 // From https://github.com/facebook/react-native/blob/master/packages/normalize-color/base.js
-const cssColors = {
+export const CSS_COLORS = {
   transparent: 0x00000000,
 
   // http://www.w3.org/TR/css3-color/#svg-color
@@ -153,11 +153,12 @@ const cssColors = {
   yellow: 0xffff00ff,
   yellowgreen: 0x9acd32ff,
 };
+export type CssColor = keyof typeof CSS_COLORS;
 
-export type CssColor = keyof typeof cssColors;
+export const cssColorNames: CssColor[] = Object.keys(CSS_COLORS) as CssColor[];
 
 export const cssToRgbInt = (name: CssColor | string): number | null =>
-  (cssColors as any)[name] || null;
+  (CSS_COLORS as any)[name] || null;
 
 export const cssToRgb = (name: CssColor | string): string | null => {
   const color = cssToRgbInt(name)?.toString(16);
@@ -167,4 +168,8 @@ export const cssToRgb = (name: CssColor | string): string | null => {
   return null;
 };
 
-export default cssColors;
+export function isCssColor(color: any): color is CssColor {
+  return cssColorNames.includes(color as CssColor);
+}
+
+export default CSS_COLORS;

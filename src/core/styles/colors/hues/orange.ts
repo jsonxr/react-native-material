@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const orange: PaletteColorShades = {
+export const orange: ColorHue = {
   50: '#fff3e0',
   100: '#ffe0b2',
   200: '#ffcc80',
@@ -16,5 +16,3 @@ const orange: PaletteColorShades = {
   A400: '#ff9100',
   A700: '#ff6d00',
 };
-
-export default orange;

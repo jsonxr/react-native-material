@@ -10,7 +10,14 @@ import { Avatar } from '../..';
 import FolderIcon from '../../icons/Folder';
 import PageviewIcon from '../../icons/Pageview';
 import AssignmentIcon from '../../icons/Assignment';
-import { blue, green, orange, purple, red, yellow } from '../../core/colors';
+import {
+  blue,
+  green,
+  orange,
+  purple,
+  red,
+  yellow,
+} from '../styles/colors/hues';
 
 import {
   avatar1,

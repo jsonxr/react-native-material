@@ -1,7 +1,9 @@
 import { AvatarProps, AvatarStyles } from '../Avatar';
 import { AvatarGroupProps, AvatarGroupStyles } from '../AvatarGroup';
-import { ButtonProps, ButtonStyles } from '../Button';
+import { ButtonStyles } from '../Button';
+import { ButtonProps } from '../Button/Button.types';
 import { TypographyProps, TypographyStyles } from '../Typography';
+import { Theme } from './theme/Theme';
 
 export interface Components {
   // MuiAlert?: {
@@ -23,7 +25,7 @@ export interface Components {
   // };
   MuiAvatar?: {
     defaultProps?: Omit<AvatarProps, 'children'>; // ComponentsProps['MuiAvatar'];
-    styleOverrides?: Partial<AvatarStyles>; //ComponentsOverrides['MuiAvatar'];
+    createStyles?: (theme: Theme, props: AvatarProps) => Partial<AvatarStyles>; //ComponentsOverrides['MuiAvatar'];
     //variants?: ComponentsVariants['MuiAvatar'];
   };
   MuiAvatarGroup?: {

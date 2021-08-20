@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const red: PaletteColorShades = {
+export const red: ColorHue = {
   50: '#ffebee',
   100: '#ffcdd2',
   200: '#ef9a9a',
@@ -16,5 +16,3 @@ const red: PaletteColorShades = {
   A400: '#ff1744',
   A700: '#d50000',
 };
-
-export default red;

@@ -1,6 +1,6 @@
 import { /*PixelRatio,*/ TextStyle } from 'react-native';
 import { deepmerge } from '../../../utils';
-import { Palette } from '../Palette';
+import { Palette } from '../colors/Palette';
 import {
   FontWeight,
   FontVariantFunction,

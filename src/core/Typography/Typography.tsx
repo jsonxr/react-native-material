@@ -6,7 +6,7 @@ import { TypographyVariant } from '../styles/typography';
 import useThemeProps from '../styles/theme/useThemeProps';
 import { capitalize } from '../../utils/capitalize';
 import { Theme } from '../styles/theme/Theme';
-import { decomposeColor } from '../styles/colorManipulator';
+import { decomposeColor } from '../styles/colors/colorManipulator';
 //import { Palette } from '../styles/Palette';
 
 export type TypographyColor =

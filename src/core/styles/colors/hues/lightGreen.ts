@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const lightGreen: PaletteColorShades = {
+export const lightGreen: ColorHue = {
   50: '#f1f8e9',
   100: '#dcedc8',
   200: '#c5e1a5',
@@ -16,5 +16,3 @@ const lightGreen: PaletteColorShades = {
   A400: '#76ff03',
   A700: '#64dd17',
 };
-
-export default lightGreen;

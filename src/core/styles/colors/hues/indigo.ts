@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const indigo: PaletteColorShades = {
+export const indigo: ColorHue = {
   50: '#e8eaf6',
   100: '#c5cae9',
   200: '#9fa8da',
@@ -16,5 +16,3 @@ const indigo: PaletteColorShades = {
   A400: '#3d5afe',
   A700: '#304ffe',
 };
-
-export default indigo;

@@ -1,5 +1,5 @@
 import { Spacing, SpacingOptions } from '../createSpacing';
-import { Palette, PaletteOptions } from '../Palette';
+import { Palette, PaletteOptions } from '../colors/Palette';
 import { Shadows } from '../shadows';
 import { Shape, ShapeOptions } from '../shape';
 import { TypographyType } from '../typography/types';

@@ -9,19 +9,20 @@ import {
   Text,
   TextStyle,
   View,
+  ViewProps,
   ViewStyle,
 } from 'react-native';
 import createStyles from './Avatar.styles';
 import { useTheme } from '../styles/theme/useTheme';
 import { Theme } from '../styles/theme/Theme';
-import useThemeProps from '../styles/theme/useThemeProps';
 import { IconName } from '../Icon/IconName';
 import { Icon } from '../Icon/Icon';
+import getThemeProps from '../styles/theme/getThemeProps';
 
 export type AvatarSize = number | 'small' | 'medium' | 'large';
 export type AvatarVariant = 'rounded' | 'square' | 'circular';
 
-export interface AvatarProps {
+export interface AvatarProps extends ViewProps {
   children?: ReactNode;
   color?: string;
   icon?: IconName;
@@ -44,6 +45,7 @@ const calculateSize = (theme: Theme, size: AvatarSize | undefined): number => {
       return theme.spacing(5);
     case 'large':
       return theme.spacing(9);
+    case 'medium': // fallthrough...
     default:
       return theme.spacing(7);
   }
@@ -69,6 +71,7 @@ const rootStyle = (
     case 'square':
       styles.push({ borderRadius: 0 });
       break;
+    case 'circular': // fallthrough to default
     default:
       styles.push({ borderRadius: width / 2 });
   }
@@ -133,6 +136,7 @@ const imageStyle = (
 };
 
 export const Avatar = (props: AvatarProps = {}) => {
+  const theme = useTheme();
   const {
     children,
     color,
@@ -140,14 +144,15 @@ export const Avatar = (props: AvatarProps = {}) => {
     image,
     icon,
     ...rest
-  } = useThemeProps({
+  } = getThemeProps({
+    theme,
     props,
     name: 'MuiAvatar',
   });
-  const theme = useTheme();
+
   // Calculate the styles
   const { styles, contrastColor, width, text } = useMemo(() => {
-    const defaultStyles = createStyles(theme);
+    const defaultStyles = createStyles(theme, props);
     const cStyles = {
       root: rootStyle(theme, defaultStyles.root, props),
       text: textStyle(theme, defaultStyles.text, props),

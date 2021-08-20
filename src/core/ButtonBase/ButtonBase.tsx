@@ -1,8 +1,14 @@
 import React, { ReactNode } from 'react';
-import { Pressable, View, ViewStyle } from 'react-native';
+import {
+  FlexStyle,
+  Pressable,
+  ShadowStyleIOS,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 export interface ButtonBaseProps {
-  style?: ViewStyle;
+  style?: ViewStyle & FlexStyle & ShadowStyleIOS;
   children?: ReactNode;
   onPress?: () => void;
   href?: string;

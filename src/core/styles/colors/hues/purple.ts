@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const purple: PaletteColorShades = {
+export const purple: ColorHue = {
   50: '#f3e5f5',
   100: '#e1bee7',
   200: '#ce93d8',
@@ -16,5 +16,3 @@ const purple: PaletteColorShades = {
   A400: '#d500f9',
   A700: '#aa00ff',
 };
-
-export default purple;

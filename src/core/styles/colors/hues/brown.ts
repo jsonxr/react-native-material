@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const brown: PaletteColorShades = {
+export const brown: ColorHue = {
   50: '#efebe9',
   100: '#d7ccc8',
   200: '#bcaaa4',
@@ -16,5 +16,3 @@ const brown: PaletteColorShades = {
   A400: '#8d6e63',
   A700: '#5d4037',
 };
-
-export default brown;

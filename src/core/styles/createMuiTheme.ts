@@ -1,7 +1,7 @@
 import { deepmerge } from '../../utils';
 // import createBreakpoints from './createBreakpoints';
 // import createMixins from './createMixins';
-import createPalette from './createPalette';
+import { createPalette } from './colors/Palette';
 import { Theme } from './Theme/Theme';
 import shadows from './shadows';
 import shape from './shape';

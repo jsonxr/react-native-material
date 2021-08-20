@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const amber: PaletteColorShades = {
+export const amber: ColorHue = {
   50: '#fff8e1',
   100: '#ffecb3',
   200: '#ffe082',
@@ -16,5 +16,3 @@ const amber: PaletteColorShades = {
   A400: '#ffc400',
   A700: '#ffab00',
 };
-
-export default amber;

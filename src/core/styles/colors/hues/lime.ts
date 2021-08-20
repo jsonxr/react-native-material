@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const lime: PaletteColorShades = {
+export const lime: ColorHue = {
   50: '#f9fbe7',
   100: '#f0f4c3',
   200: '#e6ee9c',
@@ -16,5 +16,3 @@ const lime: PaletteColorShades = {
   A400: '#c6ff00',
   A700: '#aeea00',
 };
-
-export default lime;

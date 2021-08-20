@@ -3,7 +3,7 @@ export default function getThemeProps<Theme, Props>({
   name,
   props,
 }: {
-  theme?: Theme;
+  theme: Theme;
   name: string;
   props: Props;
 }): Props {

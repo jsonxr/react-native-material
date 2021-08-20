@@ -1,6 +1,6 @@
-import { PaletteColorShades } from './Color';
+import { ColorHue } from '../Color';
 
-const pink: PaletteColorShades = {
+export const pink: ColorHue = {
   50: '#fce4ec',
   100: '#f8bbd0',
   200: '#f48fb1',
@@ -16,5 +16,3 @@ const pink: PaletteColorShades = {
   A400: '#f50057',
   A700: '#c51162',
 };
-
-export default pink;

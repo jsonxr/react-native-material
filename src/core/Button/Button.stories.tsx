@@ -36,7 +36,7 @@ export const ButtonsGrid = ({ ...props }) => {
                     {...props}
                     variant={variant}
                     size={size}
-                    color={color}
+                    color={color !== 'default' ? color : undefined}
                   />
                 ))}
               </View>
@@ -66,7 +66,7 @@ storiesOf('Buttons', module)
   .addDecorator(ThemeDecorator)
   .addDecorator(DefaultDecorator)
   .add('Contained Buttons', () => (
-    <View>
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
       <Button title="Default" variant="contained" onPress={action('onPress')} />
       <Button
         title="Primary"
@@ -91,13 +91,6 @@ storiesOf('Buttons', module)
         variant="contained"
         color="primary"
         href="#contained-buttons"
-        onPress={action('onPress')}
-      />
-      <Button
-        title="Disable Elevation"
-        variant="contained"
-        color="primary"
-        disableElevation
         onPress={action('onPress')}
       />
     </View>

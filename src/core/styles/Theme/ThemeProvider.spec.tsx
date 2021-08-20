@@ -3,8 +3,8 @@ import renderer from 'react-test-renderer';
 import createMuiTheme from '../createMuiTheme';
 import { ThemeProvider } from './ThemeProvider';
 import { Theme } from './Theme';
-import green from '../../colors/green';
-import red from '../../colors/red';
+import { green } from '../colors/hues/green';
+import { red } from '../colors/hues/red';
 import { useTheme } from './useTheme';
 import defaultTheme from './defaultTheme';
 
